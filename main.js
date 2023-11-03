@@ -294,8 +294,8 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
   }
 
   const remainingStrings = strings.map(str => str.split(sharedMiddle));
-  const starts = remainingStrings.map(([start,]) => start);
-  const ends = remainingStrings.map(([, end]) => end);
+  const starts = Array.from(new Set(remainingStrings.map(([start,]) => start)));
+  const ends = Array.from(new Set(remainingStrings.map(([, end]) => end)));
 
   let startPattern = "";
   if (starts.filter(str => str !== "").length > 0) {
