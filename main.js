@@ -13,6 +13,22 @@ switchButton.addEventListener("click", () => {
   }
 });
 
+const addButton = document.querySelector(".add-button");
+addButton.addEventListener("click", () => {
+  const inputs = document.querySelectorAll(".string-input-container");
+  const container = document.querySelector(".string-input-container").cloneNode(true);
+  container.classList.add("string-input-container");
+  const stringNumber = inputs.length + 1;
+  const label = container.querySelector("label");
+  label.setAttribute("for", `string${stringNumber}`);
+  label.innerHTML = `String ${stringNumber}`;
+  const input = container.querySelector("input");
+  input.setAttribute("name", `string${stringNumber}`);
+  input.setAttribute("id", `string${stringNumber}`);
+  input.value = "";
+  inputs[inputs.length - 1].insertAdjacentElement("afterend", container);
+});
+
 const inputForm = document.querySelector(".input-form");
 const output = document.querySelector(".output");
 inputForm.addEventListener("submit", e => {
@@ -21,7 +37,7 @@ inputForm.addEventListener("submit", e => {
   output.innerHTML = "";
 
   const inputs = Array.from(document.querySelectorAll(".string-input"));
-  const strings = inputs.map(input => input.value).filter(str => str !== "");
+  const strings = Array.from(new Set(inputs.map(input => input.value).filter(str => str !== "")));
   const preferBrackets = inputForm.group.value === "brackets";
 
   {
