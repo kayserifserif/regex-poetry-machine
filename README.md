@@ -36,7 +36,6 @@ contributions
 ## ideas
 
 - reverse regex -> strings?
-- test with 3+ strings?
 - pull from rhyming dictionary, or words that look similar?
 - shared beginning/end/middle - is there one best algorithm or good to keep the options?
 - strings -> regex -> strings -> regex; reinterpreting; performance
