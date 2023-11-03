@@ -5,11 +5,12 @@ PATTERN_TEMPLATE.remove();
 
 const switchButton = document.querySelector(".switch-button");
 switchButton.addEventListener("click", () => {
-  const input1 = document.querySelector("#string1");
-  const input2 = document.querySelector("#string2");
-  const [val1, val2] = [input1.value, input2.value];
-  input1.value = val2;
-  input2.value = val1;
+  const inputs = Array.from(document.querySelectorAll(".string-input"));
+  const vals = inputs.map(input => input.value);
+  if (vals.length >= 2) {
+    inputs[1].value = vals[0];
+    inputs[0].value = vals[1];
+  }
 });
 
 const inputForm = document.querySelector(".input-form");
@@ -19,7 +20,8 @@ inputForm.addEventListener("submit", e => {
 
   output.innerHTML = "";
 
-  const strings = [inputForm.string1.value, inputForm.string2.value].filter(str => str !== "");
+  const inputs = Array.from(document.querySelectorAll(".string-input"));
+  const strings = inputs.map(input => input.value).filter(str => str !== "");
   const preferBrackets = inputForm.group.value === "brackets";
 
   {
@@ -123,17 +125,16 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 function getSharedBeginning(strings) {
   let shared = "";
   const chars = Array.from(strings[0]);
-  for (let charIndex = 0; charIndex < strings[0].length; charIndex++) {
+  for (let charIndex = 0; charIndex < chars.length; charIndex++) {
     const char = chars[charIndex];
     for (let strIndex = 1; strIndex < strings.length; strIndex++) {
       if (charIndex > strings[strIndex].length) continue;
       const otherChars = Array.from(strings[strIndex]);
-      if (char === otherChars[charIndex]) {
-        shared += char;
-      } else {
+      if (char !== otherChars[charIndex]) {
         return shared;
       }
     }
+    shared += char;
   }
   return shared;
 }
@@ -190,20 +191,17 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
 
 function getSharedEnding(strings) {
   let shared = "";
-  // const lengths = strings.map(str => str.length);
-  // const maxLength = Math.max(...lengths);
-  // const longestString = strings.find(str => str.length === maxLength);
-
-  for (let i = 0; i < strings[0].length; i++) {
-    const char = strings[0][strings[0].length - 1 - i];
+  const chars = Array.from(strings[0]);
+  for (let charIndex = 0; charIndex < chars.length; charIndex++) {
+    const char = chars[chars.length - 1 - charIndex];
     for (let j = 1; j < strings.length; j++) {
-      const otherChar = strings[j][strings[j].length - 1 - i];
-      if (char === otherChar) {
-        shared = char + shared;
-      } else {
+      const otherChars = Array.from(strings[j]);
+      const otherChar = otherChars[otherChars.length - 1 - charIndex];
+      if (char !== otherChar) {
         return shared;
       }
     }
+    shared = char + shared;
   }
   return shared;
 }
@@ -290,20 +288,27 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
 function getSharedMiddle(strings) {
   let lengths = strings.map(str => str.length);
   let minLength = Math.min(...lengths);
-  let maxLength = Math.max(...lengths);
   const shortestString = strings.find(str => str.length === minLength);
-  // findLast in case the lengths are the same
-  const longestString = strings.findLast(str => str.length === maxLength);
+  const otherStrings = strings.filter(str => str !== shortestString);
 
-  for (let len = shortestString.length; len > 0; len--) {
-    for (let startIndex = 0; startIndex <= shortestString.length - len; startIndex++) {
+  const chars = Array.from(shortestString);
+  for (let len = chars.length; len > 0; len--) {
+    for (let startIndex = 0; startIndex <= chars.length - len; startIndex++) {
       const searchString = surrogateSlice(shortestString, startIndex, startIndex + len);
-      const index = longestString.indexOf(searchString);
-      if (index === -1) continue;
-      return searchString;
+      let found = true;
+      for (let str of otherStrings) {
+        const index = str.indexOf(searchString);
+        if (index === -1) {
+          found = false;
+        }
+      }
+      if (found) {
+        return searchString;
+      }
     }
   }
 
+  // no shared middle
   return "";
 }
 
