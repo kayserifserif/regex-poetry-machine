@@ -87,7 +87,7 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
   const sharedBeginning = getSharedBeginning(strings);
-  const remainingStrings = strings.map(str => str.slice(sharedBeginning.length));
+  const remainingStrings = strings.map(str => surrogateSlice(str, sharedBeginning.length));
 
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
   if (differsByOneCharacter) {
@@ -122,11 +122,13 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 
 function getSharedBeginning(strings) {
   let shared = "";
+  const chars = Array.from(strings[0]);
   for (let charIndex = 0; charIndex < strings[0].length; charIndex++) {
-    const char = strings[0][charIndex];
+    const char = chars[charIndex];
     for (let strIndex = 1; strIndex < strings.length; strIndex++) {
       if (charIndex > strings[strIndex].length) continue;
-      if (char === strings[strIndex][charIndex]) {
+      const otherChars = Array.from(strings[strIndex]);
+      if (char === otherChars[charIndex]) {
         shared += char;
       } else {
         return shared;
@@ -142,7 +144,7 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
   const sharedEnding = getSharedEnding(strings);
-  const remainingStrings = strings.map(str => str.slice(0, str.length - sharedEnding.length));
+  const remainingStrings = strings.map(str => surrogateSlice(str, 0, str.length - sharedEnding.length));
 
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
   if (differsByOneCharacter) {
@@ -213,7 +215,7 @@ function makePatternBySharedBeginningAndEnd(strings, preferBrackets=true, wrapIn
 
   const sharedBeginning = getSharedBeginning(strings);
   const sharedEnding = getSharedEnding(strings);
-  const remainingStrings = strings.map(str => str.slice(sharedBeginning.length, str.length - sharedEnding.length));
+  const remainingStrings = strings.map(str => surrogateSlice(str, sharedBeginning.length, str.length - sharedEnding.length));
 
   // every remainder has one character - can use [] bracket expression
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
@@ -295,7 +297,7 @@ function getSharedMiddle(strings) {
 
   for (let len = shortestString.length; len > 0; len--) {
     for (let startIndex = 0; startIndex <= shortestString.length - len; startIndex++) {
-      const searchString = shortestString.slice(startIndex, startIndex + len);
+      const searchString = surrogateSlice(shortestString, startIndex, startIndex + len);
       const index = longestString.indexOf(searchString);
       if (index === -1) continue;
       return searchString;
@@ -303,4 +305,10 @@ function getSharedMiddle(strings) {
   }
 
   return "";
+}
+
+/* surrogate-aware slice
+  https://javascript.info/iterable */
+function surrogateSlice(str, start, end) {
+  return Array.from(str).slice(start, end).join("");
 }
