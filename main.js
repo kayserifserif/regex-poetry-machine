@@ -123,14 +123,17 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 }
 
 function getSharedBeginning(strings) {
+  const sorted = strings.toSorted((a, b) => a.length - b.length);
+
   let shared = "";
-  const chars = Array.from(strings[0]);
+  const chars = Array.from(sorted[0]);
   for (let charIndex = 0; charIndex < chars.length; charIndex++) {
     const char = chars[charIndex];
-    for (let strIndex = 1; strIndex < strings.length; strIndex++) {
-      if (charIndex > strings[strIndex].length) continue;
-      const otherChars = Array.from(strings[strIndex]);
-      if (char !== otherChars[charIndex]) {
+    for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
+      const otherChars = Array.from(sorted[strIndex]);
+      const otherChar = otherChars[charIndex];
+      if (otherChar === undefined) continue;
+      if (char !== otherChar) {
         return shared;
       }
     }
@@ -190,13 +193,16 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
 }
 
 function getSharedEnding(strings) {
+  const sorted = strings.toSorted((a, b) => a.length - b.length);
+
   let shared = "";
-  const chars = Array.from(strings[0]);
+  const chars = Array.from(sorted[0]);
   for (let charIndex = 0; charIndex < chars.length; charIndex++) {
     const char = chars[chars.length - 1 - charIndex];
-    for (let j = 1; j < strings.length; j++) {
-      const otherChars = Array.from(strings[j]);
+    for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
+      const otherChars = Array.from(strings[strIndex]);
       const otherChar = otherChars[otherChars.length - 1 - charIndex];
+      if (otherChar === undefined) continue;
       if (char !== otherChar) {
         return shared;
       }
@@ -286,18 +292,15 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
 }
 
 function getSharedMiddle(strings) {
-  let lengths = strings.map(str => str.length);
-  let minLength = Math.min(...lengths);
-  const shortestString = strings.find(str => str.length === minLength);
-  const otherStrings = strings.filter(str => str !== shortestString);
+  const sorted = strings.toSorted((a, b) => a.length - b.length);
 
-  const chars = Array.from(shortestString);
+  const chars = Array.from(sorted[0]);
   for (let len = chars.length; len > 0; len--) {
     for (let startIndex = 0; startIndex <= chars.length - len; startIndex++) {
-      const searchString = surrogateSlice(shortestString, startIndex, startIndex + len);
+      const searchString = surrogateSlice(sorted[0], startIndex, startIndex + len);
       let found = true;
-      for (let str of otherStrings) {
-        const index = str.indexOf(searchString);
+      for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
+        const index = sorted[strIndex].indexOf(searchString);
         if (index === -1) {
           found = false;
         }
