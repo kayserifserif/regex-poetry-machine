@@ -19,13 +19,24 @@ addButton.addEventListener("click", () => {
   const container = document.querySelector(".string-input-container").cloneNode(true);
   container.classList.add("string-input-container");
   const stringNumber = inputs.length + 1;
+
   const label = container.querySelector("label");
   label.setAttribute("for", `string${stringNumber}`);
   label.innerHTML = `String ${stringNumber}`;
+
   const input = container.querySelector("input");
   input.setAttribute("name", `string${stringNumber}`);
   input.setAttribute("id", `string${stringNumber}`);
   input.value = "";
+
+  const button = document.createElement("button");
+  container.appendChild(button);
+  button.type = "button";
+  button.innerHTML = "Remove";
+  button.addEventListener("click", () => {
+    container.remove();
+  });
+
   inputs[inputs.length - 1].insertAdjacentElement("afterend", container);
 });
 
