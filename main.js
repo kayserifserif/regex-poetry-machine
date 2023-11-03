@@ -71,6 +71,13 @@ function makePatternByAlternation(strings, wrapInGroup=false) {
   if (strings.length === 0) return "";
   if (strings.length === 1) return strings[0];
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
+
+  const nonEmpty = strings.filter(str => str !== "");
+  const remainingOptional = nonEmpty.length === strings.length - 1;
+  if (remainingOptional) {
+    const pattern = `(${nonEmpty.join("|")})?`;
+    return pattern;
+  }
   
   // just smash them together: (make|take)
   if (wrapInGroup) {
@@ -113,6 +120,12 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 
   // default with shared beginning
   if (sharedBeginning) {
+    const remainingOptional = nonEmpty.length === remainingStrings.length - 1;
+    if (remainingOptional) {
+      const pattern = sharedBeginning + `(${nonEmpty.join("|")})?`;
+      return pattern;
+    }
+
     const pattern = sharedBeginning + `(${remainingStrings.join("|")})`;
     return pattern;
   }
@@ -254,6 +267,12 @@ function makePatternBySharedBeginningAndEnd(strings, preferBrackets=true, wrapIn
 
   // default with shared beginning and ending
   if (sharedBeginning || sharedEnding) {
+    const remainingOptional = nonEmpty.length === remainingStrings.length - 1;
+    if (remainingOptional) {
+      const pattern = sharedBeginning + `(${nonEmpty.join("|")})?` + sharedEnding;
+      return pattern;
+    }
+
     const pattern = sharedBeginning + `(${remainingStrings.join("|")})` + sharedEnding;
     return pattern;
   }
