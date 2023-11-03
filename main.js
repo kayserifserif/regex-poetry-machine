@@ -136,10 +136,18 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
   }
 
   const nonEmpty = remainingStrings.filter(str => str !== "");
-  const oneExtraCharacter = nonEmpty.length === 1;
-  if (oneExtraCharacter) {
-    // hate?
-    const pattern = sharedBeginning + `${nonEmpty[0]}?`;
+  const oneIsSubsetOfOther = nonEmpty.length === 1;
+
+  if (oneIsSubsetOfOther) {
+    const oneExtraCharacter = Array.from(nonEmpty[0]).length === 1;
+
+    if (oneExtraCharacter) {
+      // hate?
+      const pattern = sharedBeginning + `${nonEmpty[0]}?`;
+      return pattern;
+    }
+
+    const pattern = sharedBeginning + `(${nonEmpty[0]})?`;
     return pattern;
   }
 
@@ -206,7 +214,7 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
   const oneIsSubsetOfOther = nonEmpty.length === 1;
 
   if (oneIsSubsetOfOther) {
-    const oneExtraCharacter = nonEmpty[0].length === 1;
+    const oneExtraCharacter = Array.from(nonEmpty[0]).length === 1;
 
     if (oneExtraCharacter) {
       // a?live
@@ -238,7 +246,7 @@ function getSharedEnding(strings) {
   for (let charIndex = 0; charIndex < chars.length; charIndex++) {
     const char = chars[chars.length - 1 - charIndex];
     for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
-      const otherChars = Array.from(strings[strIndex]);
+      const otherChars = Array.from(sorted[strIndex]);
       const otherChar = otherChars[otherChars.length - 1 - charIndex];
       if (otherChar === undefined) continue;
       if (char !== otherChar) {
@@ -286,7 +294,7 @@ function makePatternBySharedBeginningAndEnd(strings, preferBrackets=true, wrapIn
     }
 
     // (aaa)?apple
-    const pattern = `(${nonEmpty[0]})?` + sharedEnding;
+    const pattern = sharedBeginning + `(${nonEmpty[0]})?` + sharedEnding;
     return pattern;
   }
 
