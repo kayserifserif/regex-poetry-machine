@@ -20,6 +20,9 @@ addButton.addEventListener("click", () => {
   container.classList.add("string-input-container");
   const stringNumber = inputs.length + 1;
 
+  const submit = document.querySelector("button[type='submit']");
+  submit.innerHTML = "Make a match set";
+
   const label = container.querySelector("label");
   label.setAttribute("for", `string${stringNumber}`);
   label.innerHTML = `String ${stringNumber}`;
@@ -35,6 +38,8 @@ addButton.addEventListener("click", () => {
   button.innerHTML = "Remove";
   button.addEventListener("click", () => {
     container.remove();
+    const inputs = document.querySelectorAll(".string-input-container");
+    submit.innerHTML = (inputs.length > 2) ? "Make a match set" : "Make a match pair";
   });
 
   inputs[inputs.length - 1].insertAdjacentElement("afterend", container);
