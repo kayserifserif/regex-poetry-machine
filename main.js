@@ -3,34 +3,6 @@ import "./style.css";
 const PATTERN_TEMPLATE = document.querySelector(".pattern");
 PATTERN_TEMPLATE.remove();
 
-const inputForm = document.querySelector(".input-form");
-// inputForm.addEventListener("input", () => {
-inputForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(inputForm).entries());
-  const strings = Object.values(data);
-
-  const p1 = PATTERN_TEMPLATE.cloneNode(true);
-  p1.innerHTML = makePatternByChoice(strings);
-  document.body.appendChild(p1);
-
-  const p2 = PATTERN_TEMPLATE.cloneNode(true);
-  p2.innerHTML = makePatternBySharedBeginning(strings);
-  document.body.appendChild(p2);
-
-  const p3 = PATTERN_TEMPLATE.cloneNode(true);
-  p3.innerHTML = makePatternBySharedEnding(strings);
-  document.body.appendChild(p3);
-
-  const p4 = PATTERN_TEMPLATE.cloneNode(true);
-  p4.innerHTML = makePatternBySharedBeginningAndEnd(strings);
-  document.body.appendChild(p4);
-
-  const p5 = PATTERN_TEMPLATE.cloneNode(true);
-  p5.innerHTML = makePatternBySharedMiddle(strings);
-  document.body.appendChild(p5);
-});
-
 const switchButton = document.querySelector(".switch-button");
 switchButton.addEventListener("click", () => {
   const input1 = document.querySelector("#string1");
@@ -40,34 +12,78 @@ switchButton.addEventListener("click", () => {
   input2.value = val1;
 });
 
+const inputForm = document.querySelector(".input-form");
+inputForm.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const strings = [inputForm.string1.value, inputForm.string2.value];
+  const useBrackets = inputForm.group.value === "brackets";
+
+  {
+    const p = PATTERN_TEMPLATE.cloneNode(true);
+    p.innerHTML = `${makePatternByChoice(strings)} (alternation)`;
+    document.body.appendChild(p);
+  }
+
+  {
+    const p = PATTERN_TEMPLATE.cloneNode(true);
+    p.innerHTML = `${makePatternBySharedBeginning(strings, useBrackets)} (shared beginning)`;
+    document.body.appendChild(p);
+  }
+
+  {
+    const p = PATTERN_TEMPLATE.cloneNode(true);
+    p.innerHTML = `${makePatternBySharedEnding(strings, useBrackets)} (shared ending)`;
+    document.body.appendChild(p);
+  }
+
+  {
+    const p = PATTERN_TEMPLATE.cloneNode(true);
+    p.innerHTML = `${makePatternBySharedBeginningAndEnd(strings, useBrackets)} (shared beginning and ending)`;
+    document.body.appendChild(p);
+  }
+
+  {
+    const p = PATTERN_TEMPLATE.cloneNode(true);
+    p.innerHTML = `${makePatternBySharedMiddle(strings, useBrackets)} (shared middle)`;
+    document.body.appendChild(p);
+  }
+
+  document.body.appendChild(document.createElement("br"));
+});
+
 function makePatternByChoice(strings) {
   // just smash them together: (make|take)
   const pattern = `(${strings.join("|")})`;
   return pattern;
 }
 
-function makePatternBySharedBeginning(strings) {
+function makePatternBySharedBeginning(strings, useBrackets=true) {
   const sharedBeginning = getSharedBeginning(strings);
   const remainingStrings = strings.map(str => str.slice(sharedBeginning.length));
+
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
   if (differsByOneCharacter) {
     // se[ea]
-    const pattern = `${sharedBeginning}[${remainingStrings.join("")}]`;
-    return pattern;
-  } else {
-    const nonEmpty = remainingStrings.filter(str => str !== "");
-    const oneExtraCharacter = nonEmpty.length === 1;
-
-    if (oneExtraCharacter) {
-      // hate?
-      const pattern = `${sharedBeginning}${nonEmpty[0]}?`;
-      return pattern;
-    } else {
-      // default
-      const pattern = `${sharedBeginning}(${remainingStrings.join("|")})`;
+    if (useBrackets) {
+      const pattern = sharedBeginning + `[${remainingStrings.join("")}]`;
       return pattern;
     }
+    const pattern = sharedBeginning + `(${remainingStrings.join("|")})`;
+    return pattern;
   }
+
+  const nonEmpty = remainingStrings.filter(str => str !== "");
+  const oneExtraCharacter = nonEmpty.length === 1;
+  if (oneExtraCharacter) {
+    // hate?
+    const pattern = sharedBeginning + `${nonEmpty[0]}?`;
+    return pattern;
+  }
+
+  // default
+  const pattern = sharedBeginning + `(${remainingStrings.join("|")})`;
+  return pattern;
 }
 
 function getSharedBeginning(strings) {
@@ -85,12 +101,20 @@ function getSharedBeginning(strings) {
   return shared;
 }
 
-function makePatternBySharedEnding(strings) {
+function makePatternBySharedEnding(strings, useBrackets=true) {
   const sharedEnding = getSharedEnding(strings);
   const remainingStrings = strings.map(str => str.slice(0, str.length - sharedEnding.length));
+
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
   if (differsByOneCharacter) {
-    const pattern = `[${remainingStrings.join("")}]${sharedEnding}`;
+    // brackets
+    if (useBrackets) {
+      const pattern = `[${remainingStrings.join("")}]` + sharedEnding;
+      return pattern;
+    }
+
+    // parentheses ()
+    const pattern = `(${remainingStrings.join("|")})` + sharedEnding;
     return pattern;
   }
 
@@ -113,7 +137,7 @@ function makePatternBySharedEnding(strings) {
   }
 
   // default
-  const pattern = `(${remainingStrings.join("|")})${sharedEnding}`;
+  const pattern = `(${remainingStrings.join("|")})` + sharedEnding;
   return pattern;
 }
 
@@ -137,7 +161,7 @@ function getSharedEnding(strings) {
   return shared;
 }
 
-function makePatternBySharedBeginningAndEnd(strings) {
+function makePatternBySharedBeginningAndEnd(strings, useBrackets=true) {
   const sharedBeginning = getSharedBeginning(strings);
   const sharedEnding = getSharedEnding(strings);
   const remainingStrings = strings.map(str => str.slice(sharedBeginning.length, str.length - sharedEnding.length));
@@ -145,8 +169,13 @@ function makePatternBySharedBeginningAndEnd(strings) {
   // every remainder has one character - can use [] bracket expression
   const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
   if (differsByOneCharacter) {
-    // be[an]d
-    const pattern = sharedBeginning + `[${remainingStrings.join("")}]` + sharedEnding;
+    if (useBrackets) {
+      // be[an]d
+      const pattern = sharedBeginning + `[${remainingStrings.join("")}]` + sharedEnding;
+      return pattern;
+    }
+
+    const pattern = sharedBeginning + `(${remainingStrings.join("|")})` + sharedEnding;
     return pattern;
   }
 
@@ -173,7 +202,7 @@ function makePatternBySharedBeginningAndEnd(strings) {
   return pattern;
 }
 
-function makePatternBySharedMiddle(strings) {
+function makePatternBySharedMiddle(strings, useBrackets=true) {
   const sharedMiddle = getSharedMiddle(strings);
   const remainingStrings = strings.map(str => str.split(sharedMiddle));
   const starts = remainingStrings.map(([start,]) => start);
@@ -181,11 +210,11 @@ function makePatternBySharedMiddle(strings) {
 
   let startPattern = "";
   if (starts.filter(str => str !== "").length > 0) {
-    startPattern = makePatternBySharedBeginningAndEnd(starts);
+    startPattern = makePatternBySharedBeginningAndEnd(starts, useBrackets);
   }
   let endPattern = "";
   if (ends.filter(str => str !== "").length > 0) {
-    endPattern = makePatternBySharedBeginningAndEnd(ends);
+    endPattern = makePatternBySharedBeginningAndEnd(ends, useBrackets);
   }
 
   const pattern = startPattern + sharedMiddle + endPattern;
@@ -200,8 +229,6 @@ function getSharedMiddle(strings) {
   // findLast in case the lengths are the same
   const longestString = strings.findLast(str => str.length === maxLength);
 
-  let len = shortestString.length;
-  let startIndex = 0;
   for (let len = shortestString.length; len > 0; len--) {
     for (let startIndex = 0; startIndex <= shortestString.length - len; startIndex++) {
       const searchString = shortestString.slice(startIndex, startIndex + len);

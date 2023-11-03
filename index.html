@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
-    <title>re:poems</title>
+    <title>RegEx Poetry Machine</title>
   </head>
   <body>
     <form class="input-form">
@@ -17,8 +17,16 @@
         <input type="text" name="string2" id="string2">
       </div>
       <div>
-        <button type="submit">re:poem</button>
-        <button type="button" class="switch-button">Switch</button>
+        <!-- <input type="checkbox" name="brackets" id="brackets" checked>
+        <label for="brackets">Use brackets []</label> -->
+        <input type="radio" name="group" id="group--brackets" value="brackets" checked autocomplete="off">
+        <label for="group--brackets">Brackets []</label>
+        <input type="radio" name="group" id="group--parentheses" value="parentheses" autocomplete="off">
+        <label for="group--parentheses">Parentheses ()</label>
+      </div>
+      <div>
+        <button type="submit">Make a match pair</button>
+        <button type="button" class="switch-button">Switch strings</button>
       </div>
     </form>
     <div class="pattern"></div>
