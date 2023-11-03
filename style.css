@@ -61,6 +61,14 @@ main {
   padding: 0.2em 1em;
 }
 
+.pattern.duplicate {
+  color: #afb4c7;
+}
+
+.pattern.duplicate::before {
+  color: currentColor;
+}
+
 .pattern.primary {
   color: #0c194d;
   background-color: #d1eaff;

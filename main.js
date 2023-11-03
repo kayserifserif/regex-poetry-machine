@@ -40,43 +40,52 @@ inputForm.addEventListener("submit", e => {
   const strings = Array.from(new Set(inputs.map(input => input.value).filter(str => str !== "")));
   const preferBrackets = inputForm.group.value === "brackets";
 
+  const patternByAlternation = makePatternByAlternation(strings);
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
     p.classList.add("secondary");
     p.setAttribute("data-algorithm", "Alternation");
-    p.innerHTML = `${makePatternByAlternation(strings)}`;
+    p.innerHTML = patternByAlternation;
     output.appendChild(p);
   }
 
+  const patternBySharedBeginning = makePatternBySharedBeginning(strings, preferBrackets);
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
     p.classList.add("secondary");
     p.setAttribute("data-algorithm", "Shared beginning");
-    p.innerHTML = `${makePatternBySharedBeginning(strings, preferBrackets)}`;
+    p.innerHTML = patternBySharedBeginning;
+    p.classList.toggle("duplicate", patternBySharedBeginning === patternByAlternation);
     output.appendChild(p);
   }
 
+  const patternBySharedEnding = makePatternBySharedEnding(strings, preferBrackets);
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
     p.classList.add("secondary");
     p.setAttribute("data-algorithm", "Shared ending");
-    p.innerHTML = `${makePatternBySharedEnding(strings, preferBrackets)}`;
+    p.innerHTML = patternBySharedEnding;
+    p.classList.toggle("duplicate", patternBySharedEnding === patternByAlternation);
     output.appendChild(p);
   }
 
+  const patternBySharedBeginningAndEnd = makePatternBySharedBeginningAndEnd(strings, preferBrackets);
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
     p.classList.add("secondary");
     p.setAttribute("data-algorithm", "Shared beginning and ending");
-    p.innerHTML = `${makePatternBySharedBeginningAndEnd(strings, preferBrackets)}`;
+    p.innerHTML = patternBySharedBeginningAndEnd;
+    p.classList.toggle("duplicate", patternBySharedBeginningAndEnd === patternByAlternation);
     output.appendChild(p);
   }
 
+  const patternBySharedMiddle = makePatternBySharedMiddle(strings, preferBrackets);
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
     p.classList.add("primary");
     p.setAttribute("data-algorithm", "Shared middle");
-    p.innerHTML = `${makePatternBySharedMiddle(strings, preferBrackets)}`;
+    p.innerHTML = patternBySharedMiddle;
+    p.classList.toggle("duplicate", patternBySharedMiddle === patternByAlternation);
     output.appendChild(p);
   }
 
