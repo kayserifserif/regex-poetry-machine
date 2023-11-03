@@ -1,3 +1,69 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 800px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.input-form {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.output {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .pattern {
   font-family: "IBM Plex Mono", monospace;
+  position: relative;
+}
+
+.pattern::before {
+  content: attr(data-algorithm);
+  position: absolute;
+  left: 0;
+  transform: translate(-100%, 0);
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 1rem;
+  text-align: right;
+  color: #646879;
+}
+
+.pattern.secondary {
+  color: #565c77;
+  padding: 0.2em 1em;
+}
+
+.pattern.primary {
+  color: #0c194d;
+  background-color: #d1eaff;
+  border: 0.5em solid #697cc6;
+  padding: 1em;
+  font-size: 2rem;
+  margin-top: 1em;
+}
+
+.pattern.primary::before {
+  left: -2rem
 }

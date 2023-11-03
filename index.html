@@ -7,29 +7,35 @@
     <title>RegEx Poetry Machine</title>
   </head>
   <body>
-    <form class="input-form">
-      <div>
-        <label for="string1">String 1</label>
-        <input type="text" name="string1" id="string1">
+    <main>
+      <div class="input">
+        <form class="input-form">
+          <div>
+            <label for="string1">String 1</label>
+            <input type="text" name="string1" id="string1">
+          </div>
+          <div>
+            <label for="string2">String 2</label>
+            <input type="text" name="string2" id="string2">
+          </div>
+          <div>
+            <!-- <input type="checkbox" name="brackets" id="brackets" checked>
+            <label for="brackets">Use brackets []</label> -->
+            <input type="radio" name="group" id="group--brackets" value="brackets" checked autocomplete="off">
+            <label for="group--brackets">Brackets []</label>
+            <input type="radio" name="group" id="group--parentheses" value="parentheses" autocomplete="off">
+            <label for="group--parentheses">Parentheses ()</label>
+          </div>
+          <div>
+            <button type="submit">Make a match pair</button>
+            <button type="button" class="switch-button">Switch strings</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label for="string2">String 2</label>
-        <input type="text" name="string2" id="string2">
+      <div class="output">
+        <div class="pattern"></div>
       </div>
-      <div>
-        <!-- <input type="checkbox" name="brackets" id="brackets" checked>
-        <label for="brackets">Use brackets []</label> -->
-        <input type="radio" name="group" id="group--brackets" value="brackets" checked autocomplete="off">
-        <label for="group--brackets">Brackets []</label>
-        <input type="radio" name="group" id="group--parentheses" value="parentheses" autocomplete="off">
-        <label for="group--parentheses">Parentheses ()</label>
-      </div>
-      <div>
-        <button type="submit">Make a match pair</button>
-        <button type="button" class="switch-button">Switch strings</button>
-      </div>
-    </form>
-    <div class="pattern"></div>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

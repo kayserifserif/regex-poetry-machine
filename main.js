@@ -13,40 +13,53 @@ switchButton.addEventListener("click", () => {
 });
 
 const inputForm = document.querySelector(".input-form");
+const output = document.querySelector(".output");
 inputForm.addEventListener("submit", e => {
   e.preventDefault();
+
+  output.innerHTML = "";
 
   const strings = [inputForm.string1.value, inputForm.string2.value].filter(str => str !== "");
   const useBrackets = inputForm.group.value === "brackets";
 
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
-    p.innerHTML = `${makePatternByAlternation(strings)} (alternation)`;
-    document.body.appendChild(p);
+    p.classList.add("secondary");
+    p.setAttribute("data-algorithm", "Alternation");
+    p.innerHTML = `${makePatternByAlternation(strings)}`;
+    output.appendChild(p);
   }
 
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
-    p.innerHTML = `${makePatternBySharedBeginning(strings, useBrackets)} (shared beginning)`;
-    document.body.appendChild(p);
+    p.classList.add("secondary");
+    p.setAttribute("data-algorithm", "Shared beginning");
+    p.innerHTML = `${makePatternBySharedBeginning(strings, useBrackets)}`;
+    output.appendChild(p);
   }
 
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
-    p.innerHTML = `${makePatternBySharedEnding(strings, useBrackets)} (shared ending)`;
-    document.body.appendChild(p);
+    p.classList.add("secondary");
+    p.setAttribute("data-algorithm", "Shared ending");
+    p.innerHTML = `${makePatternBySharedEnding(strings, useBrackets)}`;
+    output.appendChild(p);
   }
 
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
-    p.innerHTML = `${makePatternBySharedBeginningAndEnd(strings, useBrackets)} (shared beginning and ending)`;
-    document.body.appendChild(p);
+    p.classList.add("secondary");
+    p.setAttribute("data-algorithm", "Shared beginning and ending");
+    p.innerHTML = `${makePatternBySharedBeginningAndEnd(strings, useBrackets)}`;
+    output.appendChild(p);
   }
 
   {
     const p = PATTERN_TEMPLATE.cloneNode(true);
-    p.innerHTML = `${makePatternBySharedMiddle(strings, useBrackets)} (shared middle)`;
-    document.body.appendChild(p);
+    p.classList.add("primary");
+    p.setAttribute("data-algorithm", "Shared middle");
+    p.innerHTML = `${makePatternBySharedMiddle(strings, useBrackets)}`;
+    output.appendChild(p);
   }
 
   document.body.appendChild(document.createElement("br"));
