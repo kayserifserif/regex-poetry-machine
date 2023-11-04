@@ -5,6 +5,10 @@ export class OptionalToken {
   constructor(operand) {
     this.operand = operand;
   }
+
+  toString() {
+    return `OptionalToken(${this.operand.toString()})`;
+  }
 }
 
 export class AlternationToken {
@@ -13,6 +17,10 @@ export class AlternationToken {
   
   constructor(contents) {
     this.contents = contents;
+  }
+
+  toString() {
+    return `AlternationToken(${this.contents.map(obj => obj.toString()).join(", ")})`;
   }
 }
 
@@ -24,6 +32,10 @@ export class GroupToken {
   constructor(contents) {
     this.contents = contents;
   }
+
+  toString() {
+    return `GroupToken(${this.contents.map(obj => obj.toString()).join(", ")})`;
+  }
 }
 
 export class BracketToken {
@@ -34,6 +46,10 @@ export class BracketToken {
   constructor(contents) {
     this.contents = contents;
   }
+
+  toString() {
+    return `BracketToken(${this.contents.map(obj => obj.toString()).join(", ")})`;
+  }
 }
 
 export class StringToken {
@@ -42,6 +58,10 @@ export class StringToken {
   constructor(contents) {
     this.contents = contents;
   }
+
+  toString() {
+    return `StringToken(${this.contents})`;
+  }
 }
 
 export class CharacterToken {
@@ -49,5 +69,9 @@ export class CharacterToken {
 
   constructor(contents) {
     this.contents = contents;
+  }
+
+  toString() {
+    return `CharacterToken(${this.contents})`;
   }
 }
