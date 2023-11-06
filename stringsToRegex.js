@@ -78,6 +78,7 @@ function getSharedBeginning(strings) {
   const sorted = strings.toSorted((a, b) => a.length - b.length);
 
   let shared = "";
+  // start from shortest string
   const chars = Array.from(sorted[0]);
   for (let charIndex = 0; charIndex < chars.length; charIndex++) {
     const char = chars[charIndex];
@@ -91,6 +92,7 @@ function getSharedBeginning(strings) {
     }
     shared += char;
   }
+
   return shared;
 }
 
@@ -226,15 +228,14 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
   if (strings.length === 1) return strings[0];
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
-  const sharedMiddle = getSharedMiddle(strings);
+  const { string: sharedMiddle, positions } = getSharedMiddle(strings);
   if (!sharedMiddle) {
     const pattern = makePatternByAlternation(strings);
     return pattern;
   }
 
-  const remainingStrings = strings.map(str => str.split(sharedMiddle));
-  const starts = Array.from(new Set(remainingStrings.map(([start,]) => start)));
-  const ends = Array.from(new Set(remainingStrings.map(([, end]) => end)));
+  const starts = strings.map((str, i) => surrogateSlice(str, 0, positions[i]));
+  const ends = strings.map((str, i) => surrogateSlice(str, positions[i] + sharedMiddle.length, str.length));
 
   let startPattern = "";
   if (starts.filter(str => str !== "").length > 0) {
@@ -252,25 +253,38 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
 function getSharedMiddle(strings) {
   const sorted = strings.toSorted((a, b) => a.length - b.length);
 
+  // start from the shortest string
   const chars = Array.from(sorted[0]);
+  // search for subsets of the shortest string in other strings,
+  // decreasing the length of the substring until we find something
+  // that's shared
   for (let len = chars.length; len > 0; len--) {
     for (let startIndex = 0; startIndex <= chars.length - len; startIndex++) {
       const searchString = surrogateSlice(sorted[0], startIndex, startIndex + len);
       let found = true;
+      const positions = [startIndex];
       for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
         const index = sorted[strIndex].indexOf(searchString);
         if (index === -1) {
           found = false;
+        } else {
+          positions.push(index);
         }
       }
       if (found) {
-        return searchString;
+        return {
+          string: searchString,
+          positions: positions
+        };
       }
     }
   }
 
   // no shared middle
-  return "";
+  return {
+    string: "",
+    positions: strings.map(() => -1)
+  };
 }
 
 /* surrogate-aware slice
