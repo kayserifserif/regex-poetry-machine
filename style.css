@@ -15,6 +15,23 @@
   }
 }
 
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("./fonts/IBMPlexMono-Regular.ttf");
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("./fonts/IBMPlexSerif-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("./fonts/IBMPlexSerif-SemiBold.ttf");
+  font-weight: 500;
+}
+
 /* harms accessibility? */
 /* ::selection {
   background-color: var(--muted-green);
