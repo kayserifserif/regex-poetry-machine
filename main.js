@@ -76,27 +76,51 @@ function makePatterns() {
   const strings = Array.from(new Set(inputs.map(input => input.value).filter(str => str !== "")));
   const preferBrackets = inputForm.group.value === "brackets";
 
+  const uniquePatterns = [];
+
+  const patMiddle = makePatternBySharedMiddle(strings, preferBrackets);
+  uniquePatterns.push(patMiddle)
+  const patMiddleHtml = document.querySelector("#pattern--middle");
+  patMiddleHtml.querySelector("dd").innerHTML = patMiddle;
+
   const patAlt = makePatternByAlternation(strings);
   const patAltHtml = document.querySelector("#pattern--alternation");
+  if (uniquePatterns.includes(patAlt)) {
+    patAltHtml.classList.add("duplicate");
+  } else {
+    patAltHtml.classList.remove("duplicate");
+    uniquePatterns.push(patAlt);
+  }
   patAltHtml.querySelector("dd").innerHTML = patAlt;
+
+  const patBeginEnd = makePatternBySharedBeginningAndEnd(strings, preferBrackets);
+  const patBeginEndHtml = document.querySelector("#pattern--begin-end");
+  if (uniquePatterns.includes(patBeginEnd)) {
+    patBeginEndHtml.classList.add("duplicate");
+  } else {
+    patBeginEndHtml.classList.remove("duplicate");
+    uniquePatterns.push(patBeginEnd);
+  }
+  patBeginEndHtml.querySelector("dd").innerHTML = patBeginEnd;
 
   const patBegin = makePatternBySharedBeginning(strings, preferBrackets);
   const patBeginHtml = document.querySelector("#pattern--begin");
-  patBeginHtml.classList.toggle("duplicate", patBegin === patAlt);
+  console.log(patBegin, uniquePatterns)
+  if (uniquePatterns.includes(patBegin)) {
+    patBeginHtml.classList.add("duplicate");
+  } else {
+    patBeginHtml.classList.remove("duplicate");
+    uniquePatterns.push(patBegin);
+  }
   patBeginHtml.querySelector("dd").innerHTML = patBegin;
 
   const patEnd = makePatternBySharedEnding(strings, preferBrackets);
   const patEndHtml = document.querySelector("#pattern--end");
-  patEndHtml.classList.toggle("duplicate", patEnd === patAlt);
+  if (uniquePatterns.includes(patEnd)) {
+    patEndHtml.classList.add("duplicate");
+  } else {
+    patEndHtml.classList.remove("duplicate");
+    uniquePatterns.push(patEnd);
+  }
   patEndHtml.querySelector("dd").innerHTML = patEnd;
-
-  const patBeginEnd = makePatternBySharedBeginningAndEnd(strings, preferBrackets);
-  const patBeginEndHtml = document.querySelector("#pattern--begin-end");
-  patBeginEndHtml.classList.toggle("duplicate", patBeginEnd === patAlt);
-  patBeginEndHtml.querySelector("dd").innerHTML = patBeginEnd;
-
-  const patMiddle = makePatternBySharedMiddle(strings, preferBrackets);
-  const patMiddleHtml = document.querySelector("#pattern--middle");
-  patMiddleHtml.classList.toggle("duplicate", patMiddle === patAlt);
-  patMiddleHtml.querySelector("dd").innerHTML = patMiddle;
 }
