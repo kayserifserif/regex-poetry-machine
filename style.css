@@ -77,6 +77,13 @@ button[type="submit"]:hover {
   background-color: transparent;
   text-decoration: underline;
   text-align: left;
+
+  color: var(--greyer-green);
+  transition: 0.1s color;
+}
+
+.button--secondary:hover {
+  color: var(--grey-green);
 }
 
 h1,
@@ -120,6 +127,11 @@ body {
 }
 
 header {
+  display: flex;
+  gap: 0.5em;
+}
+
+.page-header {
   max-width: 1200px;
   width: 100%;
   margin: var(--spacing) auto;
@@ -129,9 +141,10 @@ main {
   max-width: 1200px;
   width: 100%;
   margin: var(--spacing) auto;
-  /* display: grid; */
+  display: grid;
   /* grid-template-columns: repeat(2, calc(50% - calc(3rem / 2))); */
-  display: flex;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* display: flex; */
   gap: 3rem;
 }
 @media (max-width: 800px) {
@@ -218,19 +231,6 @@ main {
   display: flex;
   align-items: flex-end;
   gap: 0.5em;
-}
-
-.save-button,
-.load-button,
-.remove-entry-button {
-  color: var(--greyer-green);
-  transition: 0.1s color;
-}
-
-.save-button:hover,
-.load-button:hover,
-.remove-entry-button:hover {
-  color: var(--grey-green);
 }
 
 .save-button {

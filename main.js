@@ -13,7 +13,7 @@ import {
 
 const output = document.querySelector(".output");
 const patterns = output.querySelector(".patterns");
-const otherPatterns = output.querySelector(".other-patterns");
+// const otherPatterns = output.querySelector(".other-patterns");
 
 const switchButton = document.querySelector(".switch-button");
 switchButton.addEventListener("click", () => {
@@ -81,6 +81,9 @@ saveButtons.forEach(button => button.addEventListener("click", () => {
   const preferBrackets = inputForm.group.value === "brackets";
   savePattern(pattern, strings, preferBrackets);
 }));
+
+const copyButton = document.querySelector(".copy-button");
+copyButton.addEventListener("click", copyAll);
 
 function makePatterns(mainPattern, _preferBrackets) {
   patterns.classList.remove("hidden");
@@ -221,4 +224,15 @@ function loadPattern(pattern, strings, preferBrackets) {
 
 function removeEntry(entry) {
   entry.remove();
+}
+
+async function copyAll() {
+  const allPatterns = Array.from(document.querySelectorAll(".saved-pattern"));
+  const patternsText = allPatterns.map(el => el.textContent).join("\n");
+  try {
+    await navigator.clipboard.writeText(patternsText);
+    console.log("Copied to clipboard:", patternsText);
+  } catch (err) {
+    console.error("Couldn't copy text:", err)
+  }
 }
