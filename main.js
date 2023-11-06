@@ -49,6 +49,7 @@ function addInputContainer() {
   const button = document.createElement("button");
   container.appendChild(button);
   button.type = "button";
+  button.classList.add("remove-input-button");
   button.innerHTML = "Remove";
   button.addEventListener("click", () => {
     container.remove();

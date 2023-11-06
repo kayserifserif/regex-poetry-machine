@@ -142,9 +142,7 @@ main {
   width: 100%;
   margin: var(--spacing) auto;
   display: grid;
-  /* grid-template-columns: repeat(2, calc(50% - calc(3rem / 2))); */
-  grid-template-columns: 1fr 1fr 1fr;
-  /* display: flex; */
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 3rem;
 }
 @media (max-width: 800px) {
@@ -179,10 +177,7 @@ main {
 }
 
 .string-input-container {
-  display: grid;
-  grid-template-columns: 1fr 4.5em;
-  gap: 1rem;
-  align-items: center;
+  position: relative;
 }
 
 .string-input {
@@ -191,6 +186,12 @@ main {
   border: 2px solid var(--bright-green);
   background-color: transparent;
   width: auto;
+}
+
+.remove-input-button {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 /* OUTPUT */
