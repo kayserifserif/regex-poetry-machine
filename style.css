@@ -76,6 +76,7 @@ button[type="submit"]:hover {
   border-radius: 0;
   background-color: transparent;
   text-decoration: underline;
+  text-align: left;
 }
 
 h1,
@@ -220,13 +221,15 @@ main {
 }
 
 .save-button,
-.load-button {
+.load-button,
+.remove-entry-button {
   color: var(--greyer-green);
   transition: 0.1s color;
 }
 
 .save-button:hover,
-.load-button:hover {
+.load-button:hover,
+.remove-entry-button:hover {
   color: var(--grey-green);
 }
 
@@ -293,7 +296,8 @@ dd {
 
 .saved-strings {
   display: flex;
-  gap: 0.5em;
+  flex-wrap: wrap;
+  gap: 0 0.5em;
   color: var(--greyer-green);
 }
 

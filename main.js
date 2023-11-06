@@ -173,13 +173,26 @@ function savePattern(pattern, strings, preferBrackets) {
   patternHtml.innerHTML = pattern;
   entry.appendChild(patternHtml);
 
+  const endControls = document.createElement("div");
+  endControls.classList.add("end-controls");
+  endControls.classList.add("controls");
+  entry.appendChild(endControls);
+
   const loadButton = document.createElement("button");
   loadButton.type = "button";
   loadButton.classList.add("load-button");
   loadButton.classList.add("button--secondary")
   loadButton.innerHTML = "Load match pair";
   loadButton.addEventListener("click", () => loadPattern(pattern, strings, preferBrackets));
-  entry.appendChild(loadButton);
+  endControls.appendChild(loadButton);
+
+  const removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.classList.add("remove-entry-button");
+  removeButton.classList.add("button--secondary")
+  removeButton.innerHTML = "Remove";
+  removeButton.addEventListener("click", () => removeEntry(entry));
+  endControls.appendChild(removeButton);
 }
 
 function loadPattern(pattern, strings, preferBrackets) {
@@ -204,4 +217,8 @@ function loadPattern(pattern, strings, preferBrackets) {
 
   // go
   makePatterns(pattern, preferBrackets);
+}
+
+function removeEntry(entry) {
+  entry.remove();
 }
