@@ -27,9 +27,10 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
   const sharedBeginning = getSharedBeginning(strings);
-  const remainingStrings = strings.map(str => surrogateSlice(str, sharedBeginning.length));
+  const remainingStrings = strings.map(str => surrogateSlice(str, Array.from(sharedBeginning).length));
+  console.log(sharedBeginning, remainingStrings)
 
-  const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
+  const differsByOneCharacter = remainingStrings.every(str => Array.from(str).length === 1);
   if (differsByOneCharacter) {
     // se[ea]
     if (preferBrackets) {
@@ -75,7 +76,7 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 }
 
 function getSharedBeginning(strings) {
-  const sorted = strings.toSorted((a, b) => a.length - b.length);
+  const sorted = strings.toSorted((a, b) => Array.from(a).length - Array.from(b).length);
 
   let shared = "";
   // start from shortest string
@@ -102,9 +103,9 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
   const sharedEnding = getSharedEnding(strings);
-  const remainingStrings = strings.map(str => surrogateSlice(str, 0, str.length - sharedEnding.length));
+  const remainingStrings = strings.map(str => surrogateSlice(str, 0, Array.from(str).length - Array.from(sharedEnding).length));
 
-  const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
+  const differsByOneCharacter = remainingStrings.every(str => Array.from(str).length === 1);
   if (differsByOneCharacter) {
     // brackets
     if (preferBrackets) {
@@ -147,7 +148,7 @@ function makePatternBySharedEnding(strings, preferBrackets=true) {
 }
 
 function getSharedEnding(strings) {
-  const sorted = strings.toSorted((a, b) => a.length - b.length);
+  const sorted = strings.toSorted((a, b) => Array.from(a).length - Array.from(b).length);
 
   let shared = "";
   const chars = Array.from(sorted[0]);
@@ -173,10 +174,12 @@ function makePatternBySharedBeginningAndEnd(strings, preferBrackets=true, wrapIn
 
   const sharedBeginning = getSharedBeginning(strings);
   const sharedEnding = getSharedEnding(strings);
-  const remainingStrings = strings.map(str => surrogateSlice(str, sharedBeginning.length, str.length - sharedEnding.length));
+  const remainingStrings = strings.map(str => {
+    return surrogateSlice(str, Array.from(sharedBeginning).length, Array.from(str).length - Array.from(sharedEnding).length);
+  });
 
   // every remainder has one character - can use [] bracket expression
-  const differsByOneCharacter = remainingStrings.every(str => str.length === 1);
+  const differsByOneCharacter = remainingStrings.every(str => Array.from(str).length === 1);
   if (differsByOneCharacter) {
     if (preferBrackets) {
       // be[an]d
@@ -193,7 +196,7 @@ function makePatternBySharedBeginningAndEnd(strings, preferBrackets=true, wrapIn
   const oneIsSubsetOfOther = nonEmpty.length === 1;
 
   if (oneIsSubsetOfOther) {
-    const oneExtraCharacter = nonEmpty[0].length === 1;
+    const oneExtraCharacter = Array.from(nonEmpty[0]).length === 1;
 
     if (oneExtraCharacter) {
       // sl?eep
@@ -235,7 +238,7 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
   }
 
   const starts = strings.map((str, i) => surrogateSlice(str, 0, positions[i]));
-  const ends = strings.map((str, i) => surrogateSlice(str, positions[i] + sharedMiddle.length, str.length));
+  const ends = strings.map((str, i) => surrogateSlice(str, positions[i] + Array.from(sharedMiddle).length, Array.from(str).length));
 
   let startPattern = "";
   if (starts.filter(str => str !== "").length > 0) {
@@ -251,7 +254,7 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
 }
 
 function getSharedMiddle(strings) {
-  const sorted = strings.toSorted((a, b) => a.length - b.length);
+  const sorted = strings.toSorted((a, b) => Array.from(a).length - Array.from(b).length);
 
   // start from the shortest string
   const chars = Array.from(sorted[0]);
