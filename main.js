@@ -11,6 +11,9 @@ import {
 // import { test } from "./regexToStrings";
 // test();
 
+const ENTRY_TEMPLATE = document.querySelector(".saved-entry");
+ENTRY_TEMPLATE.remove();
+
 const output = document.querySelector(".output");
 const patterns = output.querySelector(".patterns");
 // const otherPatterns = output.querySelector(".other-patterns");
@@ -144,59 +147,39 @@ function makePatterns(mainPattern, _preferBrackets) {
   }
   patEndHtml.querySelector("dd").innerHTML = patEnd;
 
-  if (mainPattern) {
-    const allPatterns = document.querySelectorAll(".pattern");
-    if (mainPattern === patMiddle) {
-      allPatterns.forEach(p => p.classList.remove("primary"));
-      patMiddleHtml.classList.add("primary");
-    }
-  }
+  // if (mainPattern) {
+  //   const allPatterns = document.querySelectorAll(".pattern");
+  //   if (mainPattern === patMiddle) {
+  //     allPatterns.forEach(p => p.classList.remove("primary"));
+  //     patMiddleHtml.classList.add("primary");
+  //   }
+  // }
 }
 
 function savePattern(pattern, strings, preferBrackets) {
   const saved = document.querySelector(".saved");
   saved.classList.remove("hidden");
 
-  const entry = document.createElement("div");
-  entry.classList.add("saved-entry");
+  const entry = ENTRY_TEMPLATE.cloneNode(true);
   entry.setAttribute("data-group", preferBrackets ? "brackets" : "parentheses");
   saved.appendChild(entry);
 
-  const stringsHtml = document.createElement("div");
-  stringsHtml.classList.add("saved-strings");
+  const stringsHtml = entry.querySelector(".entry-strings");
   strings.forEach(str => {
     const stringHtml = document.createElement("div");
     stringHtml.classList.add("saved-string");
     stringHtml.innerHTML = str;
     stringsHtml.appendChild(stringHtml);
   })
-  entry.appendChild(stringsHtml);
 
-  const patternHtml = document.createElement("div");
-  patternHtml.classList.add("saved-pattern");
+  const patternHtml = entry.querySelector(".entry-pattern");
   patternHtml.innerHTML = pattern;
-  entry.appendChild(patternHtml);
 
-  const endControls = document.createElement("div");
-  endControls.classList.add("end-controls");
-  endControls.classList.add("controls");
-  entry.appendChild(endControls);
-
-  const loadButton = document.createElement("button");
-  loadButton.type = "button";
-  loadButton.classList.add("load-button");
-  loadButton.classList.add("button--secondary")
-  loadButton.innerHTML = "Load match pair";
+  const loadButton = entry.querySelector(".load-button");
   loadButton.addEventListener("click", () => loadPattern(pattern, strings, preferBrackets));
-  endControls.appendChild(loadButton);
 
-  const removeButton = document.createElement("button");
-  removeButton.type = "button";
-  removeButton.classList.add("remove-entry-button");
-  removeButton.classList.add("button--secondary")
-  removeButton.innerHTML = "Remove";
-  removeButton.addEventListener("click", () => removeEntry(entry));
-  endControls.appendChild(removeButton);
+  const removeButton = entry.querySelector(".remove-entry-button");
+  removeButton.addEventListener("click", () => entry.remove());
 }
 
 function loadPattern(pattern, strings, preferBrackets) {
@@ -221,10 +204,6 @@ function loadPattern(pattern, strings, preferBrackets) {
 
   // go
   makePatterns(pattern, preferBrackets);
-}
-
-function removeEntry(entry) {
-  entry.remove();
 }
 
 async function copyAll() {

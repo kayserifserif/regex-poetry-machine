@@ -295,13 +295,13 @@ dd {
   align-items: flex-start;
 }
 
-.saved-strings {
+.entry-strings {
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.5em;
   color: var(--greyer-green);
 }
 
-.saved-pattern {
+.entry-pattern {
   font-family: "IBM Plex Mono", monospace;
 }
