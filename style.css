@@ -52,16 +52,14 @@ code {
 
 input,
 button {
-  /* font-family: inherit; */
   font-family: "IBM Plex Serif", serif;
-  color: var(--mint-green);
-  accent-color: var(--mint-green);
 }
 
 /* harms accessibility? */
 button:focus,
 input:focus {
-  outline: 2px solid var(--bright-green);
+  outline-width: 2px;
+  outline-style: solid;
   outline-offset: 2px;
 }
 
@@ -69,25 +67,16 @@ button {
   padding: 0.3em 0.6em;
   cursor: pointer;
   border-radius: 0.3em;
-  background-color: var(--muted-green);
-  border: 0.15em solid var(--bright-green);
+  border-width: 0.15em;
+  border-style: solid;
   transition: 0.1s background-color;
 }
 
-button:hover {
-  background-color: var(--dark-green);
-}
-
 button[type="submit"] {
-  /* font-weight: 600; */
-  background-color: var(--muted-green);
-  border: 0.2em solid var(--bright-green);
+  border-width: 0.2em;
+  border-style: solid;
   padding: 1em 1.5em;
   font-size: 1rem;
-}
-
-button[type="submit"]:hover {
-  background-color: var(--dark-green);
 }
 
 .button--secondary {
@@ -97,13 +86,7 @@ button[type="submit"]:hover {
   background-color: transparent;
   text-decoration: underline;
   text-align: left;
-
-  color: var(--greyer-green);
   transition: 0.1s color;
-}
-
-.button--secondary:hover {
-  color: var(--grey-green);
 }
 
 h1,
@@ -141,8 +124,6 @@ html {
 body {
   height: 100%;
   font-family: "IBM Plex Serif", serif;
-  background: linear-gradient(var(--dark-green), var(--darker-green));
-  color: var(--mint-green);
   padding: 0 var(--spacing);
 }
 
@@ -204,7 +185,8 @@ main {
 .string-input {
   font-size: 2rem;
   padding: 0.5em;
-  border: 2px solid var(--bright-green);
+  border-width: 2px;
+  border-style: solid;
   background-color: transparent;
   width: auto;
 }
@@ -233,7 +215,6 @@ main {
 .other-patterns h3 {
   margin-top: 1rem;
   font-size: 1rem;
-  color: var(--grey-green);
   font-weight: normal;
 }
 
@@ -255,11 +236,6 @@ main {
   gap: 0.5em;
 }
 
-.save-button {
-  opacity: 0.5;
-  transition: 0.1s opacity, 0.1s color;
-}
-
 dd {
   margin-left: 0;
 }
@@ -268,11 +244,6 @@ dd {
   text-transform: lowercase;
   font-variant: small-caps;
   font-size: 1rem;
-  color: var(--grey-green);
-}
-
-.pattern.duplicate {
-  color: var(--greyer-green);
 }
 
 .pattern.duplicate dt {
@@ -290,8 +261,8 @@ dd {
 }
 
 .pattern--primary dd {
-  background-color: var(--muted-green);
-  border: 0.5em solid var(--bright-green);
+  border-width: 0.5em;
+  border-style: solid;
   padding: 1em;
   font-size: 2rem;
   width: max-content;
@@ -320,7 +291,6 @@ dd {
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.5em;
-  color: var(--greyer-green);
 }
 
 .entry-pattern {

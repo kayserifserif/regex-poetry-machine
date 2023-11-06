@@ -1,0 +1,66 @@
+input,
+button {
+  color: var(--mint-green);
+  accent-color: var(--mint-green);
+}
+
+/* harms accessibility? */
+button:focus,
+input:focus {
+  outline-color: var(--bright-green);
+}
+
+button {
+  background-color: var(--muted-green);
+  border-color: var(--bright-green);
+}
+
+button:hover {
+  background-color: var(--dark-green);
+}
+
+.button--secondary {
+  color: var(--greyer-green);
+}
+
+.button--secondary:hover {
+  color: var(--grey-green);
+}
+
+/* */
+
+body {
+  background: linear-gradient(var(--dark-green), var(--darker-green));
+  color: var(--mint-green);
+}
+
+/* INPUT */
+
+.string-input {
+  border-color: var(--bright-green);
+}
+
+/* OUTPUT */
+
+.other-patterns h3 {
+  color: var(--grey-green);
+}
+
+.pattern dt {
+  color: var(--grey-green);
+}
+
+.pattern.duplicate {
+  color: var(--greyer-green);
+}
+
+.pattern--primary dd {
+  background-color: var(--muted-green);
+  border-color: var(--bright-green);
+}
+
+/* SAVED */
+
+.entry-strings {
+  color: var(--greyer-green);
+}
