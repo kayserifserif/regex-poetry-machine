@@ -69,6 +69,14 @@ inputForm.addEventListener("submit", e => {
   makePatterns();
 });
 
+const saveButtons = document.querySelectorAll(".save-button");
+saveButtons.forEach(button => button.addEventListener("click", () => {
+  const pattern = button.closest(".pattern").querySelector("dd").textContent;
+  const strings = Array.from(document.querySelectorAll(".string-input")).map(input => input.value).filter(str => str !== "");
+  const preferBrackets = inputForm.group.value === "brackets";
+  savePattern(pattern, strings, preferBrackets);
+}));
+
 function makePatterns() {
   patterns.classList.remove("hidden");
 
@@ -123,4 +131,37 @@ function makePatterns() {
     uniquePatterns.push(patEnd);
   }
   patEndHtml.querySelector("dd").innerHTML = patEnd;
+}
+
+function savePattern(pattern, strings, preferBrackets) {
+  const saved = document.querySelector(".saved");
+  saved.classList.remove("hidden");
+
+  const entry = document.createElement("div");
+  entry.classList.add("saved-entry");
+  entry.setAttribute("data-group", preferBrackets ? "brackets" : "parentheses");
+  saved.appendChild(entry);
+
+  const stringsHtml = document.createElement("div");
+  stringsHtml.classList.add("saved-strings");
+  strings.forEach(str => {
+    const stringHtml = document.createElement("div");
+    stringHtml.classList.add("saved-string");
+    stringHtml.innerHTML = str;
+    stringsHtml.appendChild(stringHtml);
+  })
+  entry.appendChild(stringsHtml);
+
+  const patternHtml = document.createElement("div");
+  patternHtml.classList.add("saved-pattern");
+  patternHtml.innerHTML = pattern;
+  entry.appendChild(patternHtml);
+
+  // const loadButton = document.createElement("button");
+  // loadButton.type = "button";
+  // loadButton.classList.add("load-button");
+  // loadButton.classList.add("button--secondary")
+  // loadButton.innerHTML = "Load match pair";
+  // loadButton.addEventListener("click", loadPattern(pattern, strings, preferBrackets));
+  // entry.appendChild(loadButton);
 }

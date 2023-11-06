@@ -32,7 +32,8 @@ code {
 
 input,
 button {
-  font-family: inherit;
+  /* font-family: inherit; */
+  font-family: "IBM Plex Serif", serif;
   color: var(--mint-green);
   accent-color: var(--mint-green);
 }
@@ -69,7 +70,17 @@ button[type="submit"]:hover {
   background-color: var(--dark-green);
 }
 
-h1 {
+.button--secondary {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
@@ -117,8 +128,9 @@ main {
   max-width: 1200px;
   width: 100%;
   margin: var(--spacing) auto;
-  display: grid;
-  grid-template-columns: repeat(2, calc(50% - calc(3rem / 2)));
+  /* display: grid; */
+  /* grid-template-columns: repeat(2, calc(50% - calc(3rem / 2))); */
+  display: flex;
   gap: 3rem;
 }
 @media (max-width: 800px) {
@@ -127,6 +139,8 @@ main {
     grid-template-rows: auto auto;
   }
 }
+
+/* INPUT */
 
 .input {
   display: flex;
@@ -165,15 +179,13 @@ main {
   width: auto;
 }
 
+/* OUTPUT */
+
 .patterns {
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.patterns h2 {
-  margin: 0;
 }
 
 .other-patterns {
@@ -183,7 +195,6 @@ main {
 }
 
 .other-patterns h3 {
-  margin: 0;
   margin-top: 1rem;
   font-size: 1rem;
   color: var(--grey-green);
@@ -195,6 +206,33 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.pattern:hover .save-button {
+  opacity: 1;
+}
+
+.pattern-top {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5em;
+}
+
+.save-button,
+.load-button {
+  color: var(--greyer-green);
+  transition: 0.1s color;
+}
+
+.save-button:hover,
+.load-button:hover {
+  color: var(--grey-green);
+}
+
+.save-button {
+  opacity: 0;
+  transition: 0.1s opacity, 0.1s color;
 }
 
 dd {
@@ -216,16 +254,49 @@ dd {
   color: currentColor;
 }
 
-.pattern.primary {
+.pattern--primary {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.pattern.primary dd {
+.pattern--primary .pattern-top {
+  gap: 1em;
+}
+
+.pattern--primary dd {
   background-color: var(--muted-green);
   border: 0.5em solid var(--bright-green);
   padding: 1em;
   font-size: 2rem;
   width: max-content;
+}
+
+/* SAVED */
+
+.saved {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.saved h2 {
+  font-size: 1rem;
+}
+
+.saved-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+}
+
+.saved-strings {
+  display: flex;
+  gap: 0.5em;
+  color: var(--greyer-green);
+}
+
+.saved-pattern {
+  font-family: "IBM Plex Mono", monospace;
 }
