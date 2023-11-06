@@ -13,6 +13,7 @@ import {
 
 const output = document.querySelector(".output");
 const patterns = output.querySelector(".patterns");
+const otherPatterns = output.querySelector(".other-patterns");
 
 const switchButton = document.querySelector(".switch-button");
 switchButton.addEventListener("click", () => {
@@ -26,7 +27,9 @@ switchButton.addEventListener("click", () => {
 });
 
 const addButton = document.querySelector(".add-button");
-addButton.addEventListener("click", () => {
+addButton.addEventListener("click", () => addInputContainer());
+
+function addInputContainer() {
   const inputs = document.querySelectorAll(".string-input-container");
   const container = document.querySelector(".string-input-container").cloneNode(true);
   const stringNumber = inputs.length + 1;
@@ -54,7 +57,9 @@ addButton.addEventListener("click", () => {
   });
 
   inputs[inputs.length - 1].insertAdjacentElement("afterend", container);
-});
+
+  return container;
+}
 
 const groupInputs = document.querySelectorAll("input[name='group']");
 groupInputs.forEach(input => input.addEventListener("input", () => {
@@ -77,11 +82,15 @@ saveButtons.forEach(button => button.addEventListener("click", () => {
   savePattern(pattern, strings, preferBrackets);
 }));
 
-function makePatterns() {
+function makePatterns(mainPattern, _preferBrackets) {
   patterns.classList.remove("hidden");
 
   const inputs = Array.from(document.querySelectorAll(".string-input"));
   const strings = Array.from(new Set(inputs.map(input => input.value).filter(str => str !== "")));
+  if (_preferBrackets !== undefined) {
+    const radio = document.querySelector(`#group--${_preferBrackets ? "brackets" : "parentheses"}`);
+    radio.checked = true;
+  }
   const preferBrackets = inputForm.group.value === "brackets";
 
   const uniquePatterns = [];
@@ -113,7 +122,6 @@ function makePatterns() {
 
   const patBegin = makePatternBySharedBeginning(strings, preferBrackets);
   const patBeginHtml = document.querySelector("#pattern--begin");
-  console.log(patBegin, uniquePatterns)
   if (uniquePatterns.includes(patBegin)) {
     patBeginHtml.classList.add("duplicate");
   } else {
@@ -131,6 +139,14 @@ function makePatterns() {
     uniquePatterns.push(patEnd);
   }
   patEndHtml.querySelector("dd").innerHTML = patEnd;
+
+  if (mainPattern) {
+    const allPatterns = document.querySelectorAll(".pattern");
+    if (mainPattern === patMiddle) {
+      allPatterns.forEach(p => p.classList.remove("primary"));
+      patMiddleHtml.classList.add("primary");
+    }
+  }
 }
 
 function savePattern(pattern, strings, preferBrackets) {
@@ -157,11 +173,35 @@ function savePattern(pattern, strings, preferBrackets) {
   patternHtml.innerHTML = pattern;
   entry.appendChild(patternHtml);
 
-  // const loadButton = document.createElement("button");
-  // loadButton.type = "button";
-  // loadButton.classList.add("load-button");
-  // loadButton.classList.add("button--secondary")
-  // loadButton.innerHTML = "Load match pair";
-  // loadButton.addEventListener("click", loadPattern(pattern, strings, preferBrackets));
-  // entry.appendChild(loadButton);
+  const loadButton = document.createElement("button");
+  loadButton.type = "button";
+  loadButton.classList.add("load-button");
+  loadButton.classList.add("button--secondary")
+  loadButton.innerHTML = "Load match pair";
+  loadButton.addEventListener("click", () => loadPattern(pattern, strings, preferBrackets));
+  entry.appendChild(loadButton);
+}
+
+function loadPattern(pattern, strings, preferBrackets) {
+  // get the right number of inputs
+  const inputContainers = Array.from(document.querySelectorAll(".string-input-container"));
+  if (inputContainers.length < strings.length) {
+    for (let i = 0; i < strings.length - inputContainers.length; i++) {
+      const newInputContainer = addInputContainer();
+      inputContainers.push(newInputContainer);
+    }
+  } else if (inputContainers.length > strings.length) {
+    for (let i = inputContainers.length - 1; i > strings.length - 1; i--) {
+      inputContainers[i].remove();
+    }
+  }
+
+  // fill in strings
+  for (let i = 0; i < inputContainers.length; i++) {
+    const input = inputContainers[i].querySelector(".string-input");
+    input.value = strings[i];
+  }
+
+  // go
+  makePatterns(pattern, preferBrackets);
 }
