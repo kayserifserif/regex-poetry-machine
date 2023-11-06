@@ -79,7 +79,7 @@ button:hover {
 }
 
 button[type="submit"] {
-  font-weight: 600;
+  /* font-weight: 600; */
   background-color: var(--muted-green);
   border: 0.2em solid var(--bright-green);
   padding: 1em 1.5em;
@@ -152,13 +152,13 @@ header {
 }
 
 .page-header {
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   margin: var(--spacing) auto;
 }
 
 main {
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   margin: var(--spacing) auto;
   display: grid;
