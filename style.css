@@ -1,3 +1,20 @@
+:root {
+  --mint-green: #A2C7C3;
+  --grey-green: #819B98;
+  --greyer-green: #5d6d6c;
+  --bright-green: #2C7F66;
+  --muted-green: #0D4F3B;
+  --dark-green: #031B14;
+  --darker-green: #02150F;
+
+  --spacing: 3rem;
+}
+@media (max-width: 800px) {
+  :root {
+    --spacing: 1rem;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -8,6 +25,62 @@ code {
   font-family: "IBM Plex Mono", monospace;
 }
 
+input,
+button {
+  font-family: inherit;
+  color: var(--mint-green);
+  accent-color: var(--mint-green);
+}
+
+button:focus,
+input:focus {
+  outline: 2px solid var(--bright-green);
+  outline-offset: 2px;
+}
+
+button {
+  padding: 0.3em 0.6em;
+  cursor: pointer;
+  border-radius: 0.3em;
+  background-color: var(--muted-green);
+  border: 0.15em solid var(--bright-green);
+  transition: 0.1s background-color;
+}
+
+button:hover {
+  background-color: var(--dark-green);
+}
+
+button[type="submit"] {
+  font-weight: 600;
+  background-color: var(--muted-green);
+  border: 0.2em solid var(--bright-green);
+  padding: 1em 1.5em;
+  font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--dark-green);
+}
+
+h1 {
+  margin: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 /* */
 
 html,
@@ -16,68 +89,131 @@ body {
   padding: 0;
 }
 
+html {
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: "IBM Plex Serif", serif;
+  background: linear-gradient(var(--dark-green), var(--darker-green));
+  color: var(--mint-green);
+  padding: 1rem;
+}
+
+header {
+  max-width: 1200px;
+  margin: var(--spacing) auto;
+}
+
 main {
-  max-width: 800px;
-  margin: 3rem auto;
+  max-width: 1200px;
+  margin: var(--spacing) auto;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - calc(var(--spacing) / 2)));
+  gap: var(--spacing);
+}
+@media (max-width: 800px) {
+  main {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+.input {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
 }
 
 .input-form {
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
-.output {
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
+.controls {
+  display: flex;
+  gap: 0.5em;
+}
+
+.string-input-container {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.string-input {
+  font-size: 2rem;
+  padding: 0.5em;
+  border: 2px solid var(--bright-green);
+  background-color: transparent;
+  width: auto;
+}
+
+.patterns {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.patterns h2 {
+  margin: 0;
+}
+
+.other-patterns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.other-patterns h3 {
+  margin: 0;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--grey-green);
+  font-weight: normal;
 }
 
 .pattern {
   font-family: "IBM Plex Mono", monospace;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.pattern::before {
-  content: attr(data-algorithm);
-  position: absolute;
-  left: 0;
-  transform: translate(-100%, 0);
+dd {
+  margin-left: 0;
+}
+
+.pattern dt {
   text-transform: lowercase;
   font-variant: small-caps;
   font-size: 1rem;
-  text-align: right;
-  color: #646879;
-}
-
-.pattern.secondary {
-  color: #565c77;
-  padding: 0.2em 1em;
+  color: var(--grey-green);
 }
 
 .pattern.duplicate {
-  color: #afb4c7;
+  color: var(--greyer-green);
 }
 
-.pattern.duplicate::before {
+.pattern.duplicate dt {
   color: currentColor;
 }
 
 .pattern.primary {
-  color: #0c194d;
-  background-color: #d1eaff;
-  border: 0.5em solid #697cc6;
-  padding: 1em;
-  font-size: 2rem;
-  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.pattern.primary::before {
-  left: -2rem
+.pattern.primary dd {
+  background-color: var(--muted-green);
+  border: 0.5em solid var(--bright-green);
+  padding: 1em;
+  font-size: 2rem;
+  width: max-content;
 }
