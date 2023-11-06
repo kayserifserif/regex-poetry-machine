@@ -32,6 +32,15 @@ word association game
 contributions
 - tried + cried -> [tc]ried
 - dalliance + alliance -> d?alliance
+- heart + hope -> h(eart|ope)
+- cloud + cling -> c(loud|ing)
+- sparkle + sprinkling -> sp(arkle|rinkling)
+- honeydew + drizzle -> (honey)?d(ew|rizzle)
+
+- make + mend -> m(ake|end)
+- 💗💜💙 + 💗💛💙 -> 💗(💜|💛)💙
+- heart + hearth -> hearth?
+- heart + heartstring -> heart(string)?
 
 ## ideas
 
