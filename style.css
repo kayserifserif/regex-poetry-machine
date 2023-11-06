@@ -15,6 +15,11 @@
   }
 }
 
+/* harms accessibility? */
+/* ::selection {
+  background-color: var(--muted-green);
+} */
+
 *,
 *::before,
 *::after {
@@ -32,6 +37,7 @@ button {
   accent-color: var(--mint-green);
 }
 
+/* harms accessibility? */
 button:focus,
 input:focus {
   outline: 2px solid var(--bright-green);
@@ -98,24 +104,25 @@ body {
   font-family: "IBM Plex Serif", serif;
   background: linear-gradient(var(--dark-green), var(--darker-green));
   color: var(--mint-green);
-  padding: 1rem;
+  padding: 0 var(--spacing);
 }
 
 header {
   max-width: 1200px;
+  width: 100%;
   margin: var(--spacing) auto;
 }
 
 main {
   max-width: 1200px;
+  width: 100%;
   margin: var(--spacing) auto;
   display: grid;
-  grid-template-columns: repeat(2, calc(50% - calc(var(--spacing) / 2)));
-  gap: var(--spacing);
+  grid-template-columns: repeat(2, calc(50% - calc(3rem / 2)));
+  gap: 3rem;
 }
 @media (max-width: 800px) {
   main {
-    max-width: 100%;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }
@@ -137,11 +144,16 @@ main {
   gap: 0.5em;
 }
 
+@media (max-width: 1200px) {
+  .end-controls {
+    flex-direction: column;
+  }
+}
+
 .string-input-container {
-  /* display: flex; */
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.5em;
+  grid-template-columns: 1fr 4.5em;
+  gap: 1rem;
   align-items: center;
 }
 
