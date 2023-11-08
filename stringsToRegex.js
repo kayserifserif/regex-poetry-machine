@@ -28,7 +28,6 @@ function makePatternBySharedBeginning(strings, preferBrackets=true) {
 
   const sharedBeginning = getSharedBeginning(strings);
   const remainingStrings = strings.map(str => surrogateSlice(str, Array.from(sharedBeginning).length));
-  console.log(sharedBeginning, remainingStrings)
 
   const differsByOneCharacter = remainingStrings.every(str => Array.from(str).length === 1);
   if (differsByOneCharacter) {
@@ -232,6 +231,7 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
   if (strings.length > 1 && strings.every(str => str === strings[0])) return strings[0];
 
   const { string: sharedMiddle, positions } = getSharedMiddle(strings);
+  console.log(sharedMiddle, positions)
   if (!sharedMiddle) {
     const pattern = makePatternByAlternation(strings);
     return pattern;
@@ -256,6 +256,13 @@ function makePatternBySharedMiddle(strings, preferBrackets=true) {
 function getSharedMiddle(strings) {
   const sorted = strings.toSorted((a, b) => Array.from(a).length - Array.from(b).length);
 
+  // this is convoluted right now but
+  // we want the `positions` array to be in the order of the original strings
+  // but we're going by the sorted order of length for efficiency
+  // so here's an array of how the sorted array maps to the original strings array
+  // so that when we return the array of positions it's in the same original order
+  const sortedToStringsOrder = sorted.map(str => strings.indexOf(str));
+
   // start from the shortest string
   const chars = Array.from(sorted[0]);
   // search for subsets of the shortest string in other strings,
@@ -265,13 +272,14 @@ function getSharedMiddle(strings) {
     for (let startIndex = 0; startIndex <= chars.length - len; startIndex++) {
       const searchString = surrogateSlice(sorted[0], startIndex, startIndex + len);
       let found = true;
-      const positions = [startIndex];
+      const positions = Array(sorted.length).fill(0);
+      positions[sortedToStringsOrder[0]] = startIndex;
       for (let strIndex = 1; strIndex < sorted.length; strIndex++) {
         const index = sorted[strIndex].indexOf(searchString);
         if (index === -1) {
           found = false;
         } else {
-          positions.push(index);
+          positions[sortedToStringsOrder[strIndex]] = index;
         }
       }
       if (found) {
