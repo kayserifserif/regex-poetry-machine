@@ -207,7 +207,7 @@ function loadPattern(pattern, strings, preferBrackets) {
 }
 
 async function copyAll() {
-  const allPatterns = Array.from(document.querySelectorAll(".saved-pattern"));
+  const allPatterns = Array.from(document.querySelectorAll(".entry-pattern"));
   const patternsText = allPatterns.map(el => el.textContent).join("\n");
   try {
     await navigator.clipboard.writeText(patternsText);
