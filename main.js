@@ -101,6 +101,9 @@ switchButton.addEventListener("click", () => {
 const addButton = document.querySelector(".add-button");
 addButton.addEventListener("click", () => addInputContainer());
 
+const clearInputButton = document.querySelector(".clear-input-button");
+clearInputButton.addEventListener("click", clearInput);
+
 function addInputContainer() {
   const inputs = document.querySelectorAll(".string-input-container");
   const container = document.querySelector(".string-input-container").cloneNode(true);
@@ -134,6 +137,12 @@ function addInputContainer() {
   return container;
 }
 
+function clearInput() {
+  const inputs = document.querySelectorAll(".string-input");
+  inputs.forEach(input => input.value = "");
+  patterns.classList.add("hidden");
+}
+
 const groupInputs = document.querySelectorAll("input[name='group']");
 groupInputs.forEach(input => input.addEventListener("input", () => {
   if (patterns.classList.contains("hidden")) return;
@@ -158,8 +167,8 @@ saveButtons.forEach(button => button.addEventListener("click", () => {
 const copyButton = document.querySelector(".copy-button");
 copyButton.addEventListener("click", copyAll);
 
-const clearButton = document.querySelector(".clear-button");
-clearButton.addEventListener("click", clearAll);
+const clearSavedButton = document.querySelector(".clear-saved-button");
+clearSavedButton.addEventListener("click", clearAll);
 
 function makePatterns(mainPattern, _preferBrackets) {
   patterns.classList.remove("hidden");
