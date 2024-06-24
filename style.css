@@ -7,11 +7,11 @@
   --dark-green: #031B14;
   --darker-green: #02150F;
 
-  --spacing: 3rem;
+  --spacing: 1rem;
 }
-@media (max-width: 800px) {
+@media (min-width: 800px) {
   :root {
-    --spacing: 1rem;
+    --spacing: 3rem;
   }
 }
 
