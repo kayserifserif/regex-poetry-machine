@@ -158,6 +158,9 @@ saveButtons.forEach(button => button.addEventListener("click", () => {
 const copyButton = document.querySelector(".copy-button");
 copyButton.addEventListener("click", copyAll);
 
+const clearButton = document.querySelector(".clear-button");
+clearButton.addEventListener("click", clearAll);
+
 function makePatterns(mainPattern, _preferBrackets) {
   patterns.classList.remove("hidden");
 
@@ -284,4 +287,9 @@ async function copyAll() {
   } catch (err) {
     console.error("Couldn't copy text:", err)
   }
+}
+
+function clearAll() {
+  const entries = document.querySelectorAll(".saved-entry");
+  entries.forEach(entry => entry.remove());
 }
