@@ -144,6 +144,10 @@ body {
   }
 }
 
+.logo {
+  margin-top: auto;
+}
+
 /* MAIN */
 
 main {
