@@ -14,6 +14,40 @@ import {
 const ENTRY_TEMPLATE = document.querySelector(".saved-entry");
 ENTRY_TEMPLATE.remove();
 
+const EXAMPLE_TEMPLATE = document.querySelector(".example-entry");
+EXAMPLE_TEMPLATE.remove();
+
+const examples = [
+  {
+    strings: ["poetry", "pottery"],
+    pattern: "po(et|tte)ry",
+    preferBrackets: true
+  }
+];
+
+const examplesContainer = document.querySelector(".examples");
+examples.forEach(example => {
+  const { strings, pattern, preferBrackets } = example;
+
+  const element = EXAMPLE_TEMPLATE.cloneNode(true);
+
+  const stringsElement = element.querySelector(".entry-strings");
+  strings.forEach(str => {
+    const stringElement = document.createElement("div");
+    stringElement.classList.add("saved-string");
+    stringElement.textContent = str;
+    stringsElement.appendChild(stringElement);
+  });
+
+  const patternElement = element.querySelector(".entry-pattern");
+  patternElement.textContent = pattern;
+
+  const loadButton = element.querySelector(".load-button");
+  loadButton.addEventListener("click", () => loadPattern(pattern, strings, preferBrackets));
+
+  examplesContainer.appendChild(element);
+});
+
 const output = document.querySelector(".output");
 const patterns = output.querySelector(".patterns");
 // const otherPatterns = output.querySelector(".other-patterns");
