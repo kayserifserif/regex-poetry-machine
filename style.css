@@ -351,11 +351,8 @@ dd {
   gap: 0.5em;
 }
 
-.saved,
-.examples {
-  h2 {
-    font-size: 1rem;
-  }
+:is(.saved, .examples) h2 {
+  font-size: 1rem;
 }
 
 .saved-entry,
