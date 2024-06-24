@@ -151,6 +151,11 @@ body {
   line-height: 1.5;
   font-size: 14px;
 }
+@media (min-width: 800px) {
+  body {
+    display: flex;
+  }
+}
 
 /* HEADER */
 
@@ -163,20 +168,17 @@ body {
 @media (min-width: 800px) {
   .page-header {
     width: 300px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
   }
 }
 
 .logo {
-  margin-top: auto;
+  margin-top: 1rem;
 }
 
 /* MAIN */
 
 main {
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto;
@@ -188,7 +190,6 @@ main {
   main {
     grid-template-columns: 400px 1fr;
     grid-template-rows: auto auto;
-    margin-left: 300px;
     padding: 0;
     padding-left: var(--spacing);
     gap: 4rem 6rem;
