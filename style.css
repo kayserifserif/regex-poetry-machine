@@ -133,7 +133,6 @@ body {
   top: 0;
   left: 0;
   height: 100vh;
-  overflow: auto;
 
   display: flex;
   flex-direction: column;
@@ -286,6 +285,18 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+}
+
+.saved-list,
+.examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.examples-list {
+  height: 300px;
+  overflow: auto;
 }
 
 .saved,

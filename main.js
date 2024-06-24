@@ -60,7 +60,7 @@ const examples = [
   },
 ];
 
-const examplesContainer = document.querySelector(".examples");
+const examplesContainer = document.querySelector(".examples-list");
 examples.forEach(example => {
   const { strings, pattern, preferBrackets } = example;
 
@@ -240,10 +240,11 @@ function makePatterns(mainPattern, _preferBrackets) {
 function savePattern(pattern, strings, preferBrackets) {
   const saved = document.querySelector(".saved");
   saved.classList.remove("hidden");
+  const savedContainer = saved.querySelector(".saved-list");
 
   const entry = ENTRY_TEMPLATE.cloneNode(true);
   entry.setAttribute("data-group", preferBrackets ? "brackets" : "parentheses");
-  saved.appendChild(entry);
+  savedContainer.appendChild(entry);
 
   const stringsHtml = entry.querySelector(".entry-strings");
   strings.forEach(str => {
@@ -299,6 +300,6 @@ async function copyAll() {
 }
 
 function clearAll() {
-  const entries = document.querySelectorAll(".saved-entry");
-  entries.forEach(entry => entry.remove());
+  const savedContainer = document.querySelector(".saved-list");
+  savedContainer.innerHTML = '';
 }
