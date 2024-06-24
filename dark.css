@@ -50,6 +50,10 @@ body {
   background-color: var(--muted-green);
 }
 
+.about {
+  color: var(--dark-mint-green);
+}
+
 /* INPUT */
 
 .string-input {

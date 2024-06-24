@@ -1,5 +1,6 @@
 :root {
   --mint-green: #A2C7C3;
+  --dark-mint-green: #79ada7;
   --grey-green: #819B98;
   --greyer-green: #5d6d6c;
   --bright-green: #2C7F66;
@@ -185,7 +186,7 @@ main {
 }
 @media (min-width: 800px) {
   main {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 400px 1fr;
     grid-template-rows: auto auto;
     margin-left: 300px;
     padding: 0;
@@ -333,6 +334,11 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.examples-list {
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .saved,
