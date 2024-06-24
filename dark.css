@@ -4,6 +4,10 @@ button {
   accent-color: var(--mint-green);
 }
 
+a {
+  color: var(--mint-green);
+}
+
 /* harms accessibility? */
 button:focus,
 input:focus {
@@ -73,10 +77,6 @@ body {
 
 /* SAVED */
 
-.examples .entry-strings {
-  color: var(--grey-green);
-}
-
-.saved .entry-strings {
+.entry-strings {
   color: var(--greyer-green);
 }
