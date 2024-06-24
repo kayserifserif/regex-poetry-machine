@@ -276,6 +276,11 @@ dd {
   gap: 1rem;
 }
 
+.saved-header {
+  display: flex;
+  gap: 0.5em;
+}
+
 .saved h2 {
   font-size: 1rem;
 }
