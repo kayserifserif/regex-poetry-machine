@@ -15,7 +15,7 @@ button {
   border-color: var(--bright-green);
 }
 
-button:hover {
+button:not(.button--secondary):hover {
   background-color: var(--dark-green);
 }
 
@@ -27,11 +27,23 @@ button:hover {
   color: var(--grey-green);
 }
 
+.page-header .button--secondary {
+  color: var(--grey-green);
+}
+
+.page-header .button--secondary:hover {
+  color: var(--mint-green);
+}
+
 /* */
 
 body {
   background: linear-gradient(var(--dark-green), var(--darker-green));
   color: var(--mint-green);
+}
+
+.page-header {
+  background-color: var(--muted-green);
 }
 
 /* INPUT */
@@ -61,6 +73,10 @@ body {
 
 /* SAVED */
 
-.entry-strings {
+.examples .entry-strings {
+  color: var(--grey-green);
+}
+
+.saved .entry-strings {
   color: var(--greyer-green);
 }
