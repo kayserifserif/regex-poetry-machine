@@ -268,24 +268,36 @@ dd {
   width: max-content;
 }
 
-/* SAVED */
+/* SAVED + EXAMPLES */
 
-.saved {
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.saved,
+.examples {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.saved-header {
+.saved-header,
+.examples-header {
   display: flex;
   gap: 0.5em;
 }
 
-.saved h2 {
-  font-size: 1rem;
+.saved,
+.examples {
+  h2 {
+    font-size: 1rem;
+  }
 }
 
-.saved-entry {
+.saved-entry,
+.example-entry {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
