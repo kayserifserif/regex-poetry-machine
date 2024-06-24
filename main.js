@@ -24,6 +24,21 @@ const examples = [
     preferBrackets: true
   },
   {
+    strings: ["bookmaking", "bookmarking"],
+    pattern: "bookmar?king",
+    preferBrackets: true
+  },
+  {
+    strings: ["heart", "hope"],
+    pattern: "h(eart|ope)",
+    preferBrackets: true
+  },
+  {
+    strings: ["words", "worlds"],
+    pattern: "worl?ds",
+    preferBrackets: true
+  },
+  {
     strings: ["cloud", "cling"],
     pattern: "c(loud|ing)",
     preferBrackets: true
