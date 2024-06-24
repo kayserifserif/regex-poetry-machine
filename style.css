@@ -124,7 +124,6 @@ html {
 body {
   height: 100%;
   font-family: "IBM Plex Serif", serif;
-  padding: 0 var(--spacing);
 }
 
 .page-header {
@@ -143,12 +142,11 @@ body {
 main {
   margin-block: var(--spacing);
   margin-left: 300px;
-  padding-left: 50px;
-  max-width: 1400px;
+  padding-left: 100px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto auto;
-  gap: 4rem 2rem;
+  gap: 4rem 6rem;
 }
 @media (max-width: 800px) {
   main {
