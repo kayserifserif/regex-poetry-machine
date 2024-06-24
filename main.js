@@ -22,7 +22,27 @@ const examples = [
     strings: ["poetry", "pottery"],
     pattern: "po(et|tte)ry",
     preferBrackets: true
-  }
+  },
+  {
+    strings: ["cloud", "cling"],
+    pattern: "c(loud|ing)",
+    preferBrackets: true
+  },
+  {
+    strings: ["honeydew", "drizzle"],
+    pattern: "(honey)?d(ew|rizzle)",
+    preferBrackets: true
+  },
+  {
+    strings: ["heart", "hearth"],
+    pattern: "hearth?",
+    preferBrackets: true
+  },
+  {
+    strings: ["💗💜💙", "💗💛💙"],
+    pattern: "💗(💜|💛)💙",
+    preferBrackets: true
+  },
 ];
 
 const examplesContainer = document.querySelector(".examples");
