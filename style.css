@@ -8,30 +8,41 @@
   --darker-green: #02150F;
 
   --spacing: 1rem;
+
+  --font-body: "Libre Baskerville", "Baskerville", serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 @media (min-width: 800px) {
   :root {
-    --spacing: 3rem;
+    --spacing: 4rem;
   }
 }
 
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("./fonts/IBMPlexMono-Regular.ttf");
+  src: url("./fonts/IBMPlexMono-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
-  font-family: "IBM Plex Serif";
-  src: url("./fonts/IBMPlexSerif-Regular.ttf");
+  font-family: "Libre Baskerville";
+  src: url("./fonts/LibreBaskerville-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "IBM Plex Serif";
-  src: url("./fonts/IBMPlexSerif-SemiBold.ttf");
-  font-weight: 500;
+  font-family: "Libre Baskerville";
+  src: url("./fonts/LibreBaskerville-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("./fonts/LibreBaskerville-Bold.woff2") format("woff2");
+  font-weight: 700;
   font-display: swap;
 }
 
@@ -52,7 +63,11 @@ code {
 
 input,
 button {
-  font-family: "IBM Plex Serif", serif;
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 /* harms accessibility? */
@@ -85,6 +100,7 @@ button[type="submit"] {
   border-radius: 0;
   background-color: transparent;
   text-decoration: underline;
+  text-underline-offset: 3px;
   text-align: left;
   transition: 0.1s color;
 }
@@ -93,6 +109,13 @@ h1,
 h2,
 h3 {
   margin: 0;
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.1;
 }
 
 .hidden {
@@ -123,7 +146,9 @@ html {
 
 body {
   height: 100%;
-  font-family: "IBM Plex Serif", serif;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 /* HEADER */
@@ -151,11 +176,11 @@ body {
 /* MAIN */
 
 main {
-  margin-block: var(--spacing);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto;
   gap: 3rem;
+  margin-block: var(--spacing);
   padding: 2rem;
 }
 @media (min-width: 800px) {
@@ -163,7 +188,8 @@ main {
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
     margin-left: 300px;
-    padding-left: 100px;
+    padding: 0;
+    padding-left: var(--spacing);
     gap: 4rem 6rem;
   }
 }
@@ -306,7 +332,7 @@ dd {
 .examples-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .saved,
