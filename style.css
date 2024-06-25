@@ -102,7 +102,7 @@ button[type="submit"] {
   background-color: transparent;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-align: left;
+  text-align: start;
   transition: 0.1s color;
 }
 
@@ -126,11 +126,11 @@ h1 {
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  height: 1px;
+  block-size: 1px;
   overflow: hidden;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  inline-size: 1px;
 }
 
 /* */
@@ -146,7 +146,7 @@ html {
 }
 
 body {
-  height: 100%;
+  block-size: 100%;
   font-family: var(--font-body);
   line-height: 1.5;
   font-size: 14px;
@@ -167,7 +167,7 @@ body {
 }
 @media (min-width: 800px) {
   .page-header {
-    width: 300px;
+    inline-size: 300px;
   }
 }
 
@@ -188,7 +188,7 @@ main {
     grid-template-columns: 400px 1fr;
     grid-template-rows: auto auto;
     padding: 0;
-    padding-left: var(--spacing);
+    padding-inline-start: var(--spacing);
     gap: 4rem 6rem;
   }
 }
@@ -237,13 +237,13 @@ main {
   border-width: 2px;
   border-style: dashed;
   background-color: transparent;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .remove-input-button {
   position: absolute;
-  right: 0;
-  top: 0;
+  inset-inline-end: 0;
+  inset-block-start: 0;
   border-radius: 0 0 0 0.3em;
 }
 
@@ -256,13 +256,13 @@ main {
 
 .swap-button {
   position: absolute;
-  top: 4.5rem;
-  right: -1.25rem;
+  inset-block-start: 4.5rem;
+  inset-inline-end: -1.25rem;
   z-index: 1;
 }
 .swap-button .icon {
-  width: 1.5rem;
-  height: 2rem;
+  inline-size: 1.5rem;
+  block-size: 2rem;
   mask: url("/icons/swap.svg");
   mask-position: center center;
   mask-repeat: no-repeat;
@@ -280,8 +280,8 @@ main {
   background-color: transparent;
 }
 .add-button .icon {
-  width: 1em;
-  height: 1em;
+  inline-size: 1em;
+  block-size: 1em;
   mask: url("/icons/plus.svg");
   mask-position: center center;
   mask-repeat: no-repeat;
@@ -311,7 +311,7 @@ main {
 }
 
 .other-patterns h3 {
-  margin-top: 1rem;
+  margin-block-start: 1rem;
   font-size: 1rem;
   font-weight: normal;
 }
@@ -335,7 +335,7 @@ main {
 }
 
 dd {
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 
 .pattern dt {
@@ -363,7 +363,7 @@ dd {
   border-style: solid;
   padding: 1em;
   font-size: 2rem;
-  width: max-content;
+  inline-size: max-content;
 }
 
 /* SAVED + EXAMPLES */
@@ -424,16 +424,16 @@ dd {
 
 .saved-string:first-of-type {
   border-radius: 4px 0 0 4px;
-  padding-left: 0.35em;
+  padding-inline-start: 0.35em;
 }
 
 .saved-string:last-of-type {
   border-radius: 0 4px 4px 0;
-  padding-right: 0.35em;
+  padding-inline-end: 0.35em;
 }
 
 .saved-string + .saved-string {
-  margin-left: -1px;
+  margin-inline-start: -1px;
 }
 
 .entry-pattern {
