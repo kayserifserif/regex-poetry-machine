@@ -21,20 +21,20 @@
 
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("./fonts/IBMPlexMono-Regular.woff2") format("woff2");
+  src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Libre Baskerville";
-  src: url("./fonts/LibreBaskerville-Regular.woff2") format("woff2");
+  src: url("/fonts/LibreBaskerville-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Libre Baskerville";
-  src: url("./fonts/LibreBaskerville-Italic.woff2") format("woff2");
+  src: url("/fonts/LibreBaskerville-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -42,7 +42,7 @@
 
 @font-face {
   font-family: "Libre Baskerville";
-  src: url("./fonts/LibreBaskerville-Bold.woff2") format("woff2");
+  src: url("/fonts/LibreBaskerville-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
