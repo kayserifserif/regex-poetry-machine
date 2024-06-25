@@ -130,9 +130,12 @@ function addInputContainer() {
     container.remove();
     const inputs = document.querySelectorAll(".string-input-container");
     submit.innerHTML = (inputs.length > 2) ? "Make a match set" : "Make a match pair";
+    swapButton.classList.toggle("hidden", inputs.length !== 2);
   });
 
   inputs[inputs.length - 1].insertAdjacentElement("afterend", container);
+
+  swapButton.classList.toggle("hidden", inputs.length + 1 !== 2);
 
   return container;
 }
