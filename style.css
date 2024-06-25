@@ -263,7 +263,7 @@ main {
 .swap-button .icon {
   inline-size: 1.5rem;
   block-size: 2rem;
-  mask: url("/icons/swap.svg");
+  mask-image: url("/icons/swap.svg");
 }
 @media (min-width: 800px) {
   .swap-button {
@@ -284,7 +284,7 @@ main {
 .add-button .icon {
   inline-size: 1em;
   block-size: 1em;
-  mask: url("/icons/plus.svg");
+  mask-image: url("/icons/plus.svg");
 }
 
 .remove-input-button {
@@ -296,7 +296,7 @@ main {
 .remove-input-button .icon {
   inline-size: 1em;
   block-size: 1em;
-  mask: url("/icons/minus.svg");
+  mask-image: url("/icons/minus.svg");
 }
 
 /* OUTPUT */
