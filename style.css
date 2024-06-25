@@ -310,13 +310,13 @@ main {
 }
 
 .other-patterns {
+  margin-block-start: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 .other-patterns h3 {
-  margin-block-start: 1rem;
   font-size: 1rem;
   font-weight: normal;
 }
