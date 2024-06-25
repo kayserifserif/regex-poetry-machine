@@ -36,7 +36,7 @@ contributions
 - tried + cried -> [tc]ried
 - dalliance + alliance -> d?alliance
 - heart + hope -> h(eart|ope)
-- cloud + cling -> c(loud|ing)
+- cloud + cling -> cl(oud|ing)
 - sparkle + sprinkling -> sp(arkle|rinkling)
 - honeydew + drizzle -> (honey)?d(ew|rizzle)
 

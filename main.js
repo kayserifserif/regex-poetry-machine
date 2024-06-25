@@ -43,7 +43,7 @@ const examples = [
   },
   {
     strings: ["cloud", "cling"],
-    pattern: "c(loud|ing)",
+    pattern: "cl(oud|ing)",
     preferBrackets: true
   },
   {
