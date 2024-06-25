@@ -72,8 +72,8 @@ button {
 }
 
 /* harms accessibility? */
-button:focus,
-input:focus {
+button:focus-visible,
+input:focus-visible {
   outline-width: 2px;
   outline-style: solid;
   outline-offset: 2px;

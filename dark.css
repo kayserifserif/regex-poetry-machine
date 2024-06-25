@@ -9,8 +9,8 @@ a {
 }
 
 /* harms accessibility? */
-button:focus,
-input:focus {
+button:focus-visible,
+input:focus-visible {
   outline-color: var(--bright-green);
 }
 
