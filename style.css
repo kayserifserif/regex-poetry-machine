@@ -245,8 +245,13 @@ main {
   display: flex;
   justify-content: center;
   background-color: transparent;
+  border-style: dashed;
   padding-block: 0.5em;
   border-radius: 0;
+}
+.add-button:hover {
+  border-style: solid;
+  background-color: transparent;
 }
 .add-button .icon {
   width: 1em;

@@ -23,10 +23,6 @@ button {
   background-color: var(--dark-green);
 }
 
-.add-button:hover {
-  background-color: var(--muted-green);
-}
-
 .button--secondary {
   color: var(--greyer-green);
 }
