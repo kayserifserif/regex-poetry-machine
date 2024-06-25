@@ -240,6 +240,9 @@ function makePatterns(mainPattern, _preferBrackets) {
   }
   patEndHtml.querySelector("dd").innerHTML = patEnd;
 
+  const heading = patterns.querySelector("h2");
+  heading.textContent = (inputs.length > 2) ? "Match set" : "Match pair";
+
   // if (mainPattern) {
   //   const allPatterns = document.querySelectorAll(".pattern");
   //   if (mainPattern === patMiddle) {
