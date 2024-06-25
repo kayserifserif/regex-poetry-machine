@@ -257,7 +257,7 @@ main {
 .swap-button {
   position: absolute;
   inset-block-start: 4.5rem;
-  inset-inline-end: -1.25rem;
+  inset-inline-end: 0.5rem;
   z-index: 1;
 }
 .swap-button .icon {
@@ -267,6 +267,11 @@ main {
   mask-position: center center;
   mask-repeat: no-repeat;
   background-color: currentColor;
+}
+@media (min-width: 800px) {
+  .swap-button {
+    inset-inline-end: -1.25rem;
+  }
 }
 
 .add-button {
