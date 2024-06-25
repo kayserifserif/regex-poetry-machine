@@ -241,6 +241,20 @@ main {
   border-radius: 0 0 0 0.3em;
 }
 
+.add-button {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  padding-block: 0.5em;
+  border-radius: 0;
+}
+.add-button .icon {
+  width: 1em;
+  height: 1em;
+  mask: url("/icons/plus.svg");
+  background-color: currentColor;
+}
+
 /* OUTPUT */
 
 @media (min-width: 800px) {
