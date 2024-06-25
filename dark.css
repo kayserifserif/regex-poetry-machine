@@ -19,7 +19,7 @@ button {
   border-color: var(--bright-green);
 }
 
-button:not(.button--secondary):hover {
+.button--primary:hover {
   background-color: var(--dark-green);
 }
 
