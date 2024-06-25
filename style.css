@@ -328,10 +328,10 @@ main {
   opacity: 1;
 }
 
-.pattern-top {
+.pattern-bottom {
   display: flex;
   align-items: flex-end;
-  gap: 0.5em;
+  gap: 1.5em;
 }
 
 dd {
@@ -352,10 +352,6 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.pattern--primary .pattern-top {
-  gap: 1em;
 }
 
 .pattern--primary dd {
