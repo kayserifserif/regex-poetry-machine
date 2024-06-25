@@ -257,7 +257,7 @@ main {
 .swap-button {
   position: absolute;
   top: 4.5rem;
-  left: -1.25rem;
+  right: -1.25rem;
   z-index: 1;
 }
 .swap-button .icon {
