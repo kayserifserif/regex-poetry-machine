@@ -93,6 +93,7 @@ button[type="submit"] {
   border-style: solid;
   padding: 1em 1.5em;
   font-size: 1rem;
+  width: 100%;
 }
 
 .button--secondary {
