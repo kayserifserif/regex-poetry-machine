@@ -87,8 +87,8 @@ const output = document.querySelector(".output");
 const patterns = output.querySelector(".patterns");
 // const otherPatterns = output.querySelector(".other-patterns");
 
-const switchButton = document.querySelector(".switch-button");
-switchButton.addEventListener("click", () => {
+const swapButton = document.querySelector(".swap-button");
+swapButton.addEventListener("click", () => {
   const inputs = Array.from(document.querySelectorAll(".string-input"));
   const vals = inputs.map(input => input.value);
   if (vals.length >= 2) {

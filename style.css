@@ -247,20 +247,20 @@ main {
   border-radius: 0 0 0 0.3em;
 }
 
-.switch-button,
+.swap-button,
 .add-button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.switch-button {
+.swap-button {
   position: absolute;
   top: 4.5rem;
   left: -1.25rem;
   z-index: 1;
 }
-.switch-button .icon {
+.swap-button .icon {
   width: 1.5rem;
   height: 2rem;
   mask: url("/icons/swap.svg");
