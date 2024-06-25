@@ -189,7 +189,13 @@ function makePatterns(mainPattern, _preferBrackets) {
   const patMiddle = makePatternBySharedMiddle(strings, preferBrackets);
   uniquePatterns.push(patMiddle)
   const patMiddleHtml = document.querySelector("#pattern--middle");
-  patMiddleHtml.querySelector("dd").innerHTML = patMiddle;
+  const dd = patMiddleHtml.querySelector("dd");
+  dd.innerHTML = patMiddle;
+  if (patMiddle.length > 15) {
+    dd.style.fontSize = `${ patMiddle.length / 12 }rem`;
+  } else {
+    dd.style.removeProperty("font-size");
+  }
 
   const patAlt = makePatternByAlternation(strings);
   const patAltHtml = document.querySelector("#pattern--alternation");
