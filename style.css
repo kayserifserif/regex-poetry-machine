@@ -133,6 +133,12 @@ h1 {
   inline-size: 1px;
 }
 
+.icon {
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  background-color: currentColor;
+}
+
 /* */
 
 html,
@@ -240,15 +246,9 @@ main {
   inline-size: 100%;
 }
 
-.remove-input-button {
-  position: absolute;
-  inset-inline-end: 0;
-  inset-block-start: 0;
-  border-radius: 0 0 0 0.3em;
-}
-
 .swap-button,
-.add-button {
+.add-button,
+.remove-input-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,9 +264,6 @@ main {
   inline-size: 1.5rem;
   block-size: 2rem;
   mask: url("/icons/swap.svg");
-  mask-position: center center;
-  mask-repeat: no-repeat;
-  background-color: currentColor;
 }
 @media (min-width: 800px) {
   .swap-button {
@@ -288,9 +285,18 @@ main {
   inline-size: 1em;
   block-size: 1em;
   mask: url("/icons/plus.svg");
-  mask-position: center center;
-  mask-repeat: no-repeat;
-  background-color: currentColor;
+}
+
+.remove-input-button {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: 0;
+  border-radius: 0 0 0 0.3em;
+}
+.remove-input-button .icon {
+  inline-size: 1em;
+  block-size: 1em;
+  mask: url("/icons/minus.svg");
 }
 
 /* OUTPUT */

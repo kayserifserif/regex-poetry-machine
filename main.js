@@ -17,6 +17,9 @@ ENTRY_TEMPLATE.remove();
 const EXAMPLE_TEMPLATE = document.querySelector(".example-entry");
 EXAMPLE_TEMPLATE.remove();
 
+const REMOVE_INPUT_TEMPLATE = document.querySelector(".remove-input-button");
+REMOVE_INPUT_TEMPLATE.remove();
+
 const examples = [
   {
     strings: ["poetry", "pottery"],
@@ -121,12 +124,9 @@ function addInputContainer() {
   input.setAttribute("id", `string${stringNumber}`);
   input.value = "";
 
-  const button = document.createElement("button");
-  container.appendChild(button);
-  button.type = "button";
-  button.classList.add("remove-input-button");
-  button.innerHTML = "Remove";
-  button.addEventListener("click", () => {
+  const removeButton = REMOVE_INPUT_TEMPLATE.cloneNode(true);
+  container.appendChild(removeButton);
+  removeButton.addEventListener("click", () => {
     container.remove();
     const inputs = document.querySelectorAll(".string-input-container");
     submit.innerHTML = (inputs.length > 2) ? "Make a match set" : "Make a match pair";
