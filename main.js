@@ -98,7 +98,10 @@ swapButton.addEventListener("click", () => {
     inputs[1].value = vals[0];
     inputs[0].value = vals[1];
   }
-  makePatterns();
+
+  if (!patterns.classList.contains("hidden")) {
+    makePatterns();
+  }
 });
 
 const addButton = document.querySelector(".add-button");
