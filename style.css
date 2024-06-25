@@ -231,7 +231,7 @@ main {
   border-width: 2px;
   border-style: dashed;
   background-color: transparent;
-  width: auto;
+  width: 100%;
 }
 
 .remove-input-button {
