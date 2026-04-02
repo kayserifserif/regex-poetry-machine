@@ -1,0 +1,89 @@
+/* input,
+button {
+  color: var(--mint-green);
+  accent-color: var(--mint-green);
+} */
+
+:root {
+  --background-grey: #F9F9F9;
+}
+
+input {
+  color: var(--dark-green);
+  accent-color: var(--dark-green);
+}
+
+button {
+  color: var(--mint-green);
+}
+
+/* harms accessibility? */
+button:focus,
+input:focus {
+  outline-color: var(--bright-green);
+}
+
+button {
+  /* background-color: var(--muted-green);
+  border-color: var(--bright-green); */
+  background-color: var(--bright-green);
+  border-color: var(--mint-green);
+  /* color: var(--mint-green); */
+  color: var(--background-grey);
+  /* color: var(--dark-green); */
+}
+
+button:hover {
+  background-color: var(--dark-green);
+}
+
+.button--secondary {
+  color: var(--grey-green);
+}
+
+.button--secondary:hover {
+  color: var(--greyer-green);
+  background-color: transparent;
+}
+
+/* */
+
+body {
+  /* background: linear-gradient(var(--dark-green), var(--darker-green)); */
+  /* background: var(--mint-green); */
+  background-color: var(--background-grey);
+  /* color: var(--mint-green); */
+  color: var(--dark-green);
+}
+
+/* INPUT */
+
+.string-input {
+  border-color: var(--bright-green);
+}
+
+/* OUTPUT */
+
+.other-patterns h3 {
+  color: var(--greyer-green);
+}
+
+.pattern dt {
+  color: var(--greyer-green);
+}
+
+.pattern.duplicate {
+  color: var(--grey-green);
+}
+
+.pattern--primary dd {
+  background-color: var(--muted-green);
+  border-color: var(--bright-green);
+  color: var(--mint-green);
+}
+
+/* SAVED */
+
+.entry-strings {
+  color: var(--greyer-green);
+}
